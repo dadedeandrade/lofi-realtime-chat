@@ -1,4 +1,4 @@
-import {Box, Button. Text, TextField, Image} from '@skynexui/components';
+import {Box, Button, Text, TextField, Image} from '@skynexui/components';
 import appConfig from '../config.json'
 
 function GlobalStyle() {
