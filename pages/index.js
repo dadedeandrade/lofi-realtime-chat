@@ -19,10 +19,44 @@ function Titulo(props) {
 
   )
 }
+function UserImage(props) {
+  const src = props.src;
+
+  if(src.length>=26){
+    return (
+      <>
+
+            <img
+              src={src}
+
+            />
+
+            <style jsx>{`
+              img {
+                border-radius: 50%;
+                
+                margin-bottom: 16px;
+                width:100%;
+                height:100%;
+              }
+          `}</style>
+  
+        </>
+    
+      )
+  } else {
+    return (
+      <>
+      </>
+    )
+  }
+  
+}
+
 
 export default function PaginaInicial() {
-  // const username = 'andradeviniicius';
   const [username, setUsername] = useState('andradeviniicius');
+  // const [image, setImage] = useState(`https://github.com/${username}.png`)
   const roteamento = useRouter()
   console.log(roteamento)
 
@@ -87,6 +121,7 @@ export default function PaginaInicial() {
                 function(event){
                   const valor = event.target.value
                   setUsername(valor)
+                  // setImage(valor)
                 }
               }
             />
@@ -123,13 +158,23 @@ export default function PaginaInicial() {
           >
             {/* Desafio Aula2 */}
             {/* Só mostrar img se tiver +2 caracteres */}
-            <Image
+            
+            <UserImage
+              src={`https://github.com/${username}.png`}>
+
+            </UserImage>
+            
+            
+            {/* <Image
               styleSheet={{
                 borderRadius: '50%',
                 marginBottom: '16px',
               }}
               src={`https://github.com/${username}.png`}
-            />
+            /> */}
+            
+            
+            
             <Text
               variant="body4"
               styleSheet={{
