@@ -1,6 +1,9 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
+import { useRouter} from 'next/router'
+import { createClient } from '@supabase/supabase-js'
+import react from 'react';
 
 export default function ChatPage() {
     // Sua lógica vai aqui
@@ -26,17 +29,40 @@ export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('')
     const [messageList, setMessageList] = React.useState([])
 
+    const roteamento = useRouter()
+    const loggedUser = roteamento.query.username
+    console.log(roteamento)
+    console.log(loggedUser)
+
+    const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzgxMTE1NywiZXhwIjoxOTU5Mzg3MTU3fQ.wfDaJbPrC2EILmZl8R7tHgeTxIeTFx7m-i_c1gMTJK0'
+const SUPA_URL = 'https://jerfaxeghnnbhfxvvucu.supabase.co'
+const dbSupaInteraction = createClient(SUPA_URL,SUPA_KEY)
+
+// Por padrao o useeffect roda qnd a pagina carrega
+// Caso queira onChange basta colocar a variavel onchange na entrada secundaria array
+React.useEffect(()=>{
+    dbSupaInteraction.from('mesHis').select('*').order('id', {ascending: false}).then(({data})=>{
+        setMessageList(data);
+        console.log(data)
+    })
+},[])
+
+
     function handleNewMessage(novaMensagem){
         const mensagem = {
             id: messageList.length + 1,
-            de: 'vanessametonini',
+            de: loggedUser,
             texto: novaMensagem
         }
+        dbSupaInteraction.from('mesHis').insert([mensagem]).then(({data})=>{
+            console.log('Resposta:::: '+data)
+            setMessageList([
+                data[0],
+                ...messageList
+            ]);
 
-    setMessageList([
-        mensagem,
-        ...messageList
-    ]);
+        })
+
     setMensagem('');
         
     }
@@ -145,7 +171,6 @@ function Header() {
 
 function MessageList(props) {    
     const messageList  = props.messageList 
-    console.log(messageList)
     return (
         <Box
             tag="ul" 
@@ -187,7 +212,7 @@ function MessageList(props) {
                                     display: 'inline-block',
                                     marginRight: '8px',
                                 }}
-                                src={`https://github.com/vanessametonini.png`}
+                                src={`https://github.com/${mensagemAtual.de}.png`}
                             />
                             <Text tag="strong">
                                 {mensagemAtual.de} 

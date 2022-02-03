@@ -95,7 +95,7 @@ export default function PaginaInicial() {
                     // window.location.href = '/chat'
               // 
               // Recurso do Next:
-              roteamento.push('/chat')
+              roteamento.push(`/chat?username=${username}`)
             }}
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
