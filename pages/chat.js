@@ -1,72 +1,71 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
-import { useRouter} from 'next/router'
-import { createClient } from '@supabase/supabase-js'
-import react from 'react';
+import { useRouter } from 'next/router'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { ButtonSendSticker } from '../src/components/buttonSendSticker'
+
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzgxMTE1NywiZXhwIjoxOTU5Mzg3MTU3fQ.wfDaJbPrC2EILmZl8R7tHgeTxIeTFx7m-i_c1gMTJK0'
+const SUPA_URL = 'https://jerfaxeghnnbhfxvvucu.supabase.co'
+const dbSupaInteraction = createClient(SUPA_URL, SUPA_KEY)
+
+
 
 export default function ChatPage() {
-    // Sua lógica vai aqui
-        /*
-            Usuario
-        - Digita no campo
-        - Aperta Enter
-        - Vê a mensagem dele na Tela
-            
-            Dev
-        [x] Campo de digitação
-        [x] Identificar o Enter apertado  
-        [x] Guardar o valor escrito em uma variavel  
-        [ ] Mostrar no chat a mensagem  
-
-        [ ] Limpar o valor escrito para poder mandar outra mensagem  
-        [ ] 
-        
-        */
-    // ./Sua lógica vai aqui
-
-
     const [mensagem, setMensagem] = React.useState('')
     const [messageList, setMessageList] = React.useState([])
+    // console.log('Message list ' + messageList)
 
+    function listenerSupaBase(addMsg){
+        return dbSupaInteraction
+            .from('mesHis')
+            .on('INSERT',(liveResponse) => {
+                addMsg(liveResponse.new)
+            })
+            .subscribe()    
+    } 
+    
+    
     const roteamento = useRouter()
     const loggedUser = roteamento.query.username
-    console.log(roteamento)
-    console.log(loggedUser)
+    // console.log(roteamento)
+    // console.log(loggedUser)
+    
 
-    const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzgxMTE1NywiZXhwIjoxOTU5Mzg3MTU3fQ.wfDaJbPrC2EILmZl8R7tHgeTxIeTFx7m-i_c1gMTJK0'
-const SUPA_URL = 'https://jerfaxeghnnbhfxvvucu.supabase.co'
-const dbSupaInteraction = createClient(SUPA_URL,SUPA_KEY)
+    // Por padrao o useeffect roda qnd a pagina carrega
+    // Caso queira onChange basta colocar a variavel onchange na entrada secundaria array
+    React.useEffect(() => {
+        dbSupaInteraction.from('mesHis').select('*').order('id', { ascending: false }).then(({ data }) => {
+            setMessageList(data);
+            // console.log(data)
+        })
+        listenerSupaBase((novaMensagem)=>{
+            console.log('novamensagem: '+novaMensagem);
+            setMessageList((realtimeListValue)=>{
+                return [
+                    novaMensagem, ...realtimeListValue,
+                ]
+            })
+    }, [])
+})
 
-// Por padrao o useeffect roda qnd a pagina carrega
-// Caso queira onChange basta colocar a variavel onchange na entrada secundaria array
-React.useEffect(()=>{
-    dbSupaInteraction.from('mesHis').select('*').order('id', {ascending: false}).then(({data})=>{
-        setMessageList(data);
-        console.log(data)
-    })
-},[])
 
-
-    function handleNewMessage(novaMensagem){
+    function handleNewMessage(novaMensagem) {
         const mensagem = {
             id: messageList.length + 1,
             de: loggedUser,
             texto: novaMensagem
         }
-        dbSupaInteraction.from('mesHis').insert([mensagem]).then(({data})=>{
-            console.log('Resposta:::: '+data)
-            setMessageList([
-                data[0],
-                ...messageList
-            ]);
+        dbSupaInteraction.from('mesHis').insert([mensagem])
+        .then(({ data }) => {
+            console.log('Resposta handleNewMessage:::: ' + data)
+            
 
         })
 
-    setMensagem('');
-        
+        setMensagem('');
+
     }
-        
 
     return (
         <Box
@@ -92,8 +91,8 @@ React.useEffect(()=>{
                     padding: '32px',
                 }}
             >
-                <Header 
-                
+                <Header
+
                 />
                 <Box
                     styleSheet={{
@@ -108,8 +107,7 @@ React.useEffect(()=>{
                     }}
                 >
 
-                    <MessageList messageList={messageList}  />
-
+                    <MessageList messageList={messageList} />
                     <Box
                         as="form"
                         styleSheet={{
@@ -132,17 +130,22 @@ React.useEffect(()=>{
                                 marginRight: '12px',
                                 color: appConfig.theme.colors.neutrals[200],
                             }}
-                            onChange={(event)=>{
+                            onChange={(event) => {
                                 const valor = event.target.value
                                 setMensagem(valor)
                             }}
-                            onKeyPress={(event)=>{
-                                if(event.key==='Enter'){
+                            onKeyPress={(event) => {
+                                if (event.key === 'Enter') {
                                     event.preventDefault();
                                     handleNewMessage(mensagem);
                                 }
                             }
                             }
+                        />
+                        <ButtonSendSticker
+                        onStickerClick={(sticker)=>{
+                          handleNewMessage(':stickerURL:'+sticker)
+                        }}
                         />
                     </Box>
                 </Box>
@@ -150,6 +153,7 @@ React.useEffect(()=>{
         </Box>
     )
 }
+
 
 function Header() {
     return (
@@ -169,11 +173,11 @@ function Header() {
     )
 }
 
-function MessageList(props) {    
-    const messageList  = props.messageList 
+function MessageList(props) {
+    // const messageList  = props.messageList 
     return (
         <Box
-            tag="ul" 
+            tag="ul"
             styleSheet={{
                 overflow: 'auto',
                 display: 'flex',
@@ -183,7 +187,7 @@ function MessageList(props) {
                 marginBottom: '16px',
             }}
         >
-            {props.messageList.map((mensagemAtual)=> {
+            {props.messageList.map((mensagemAtual) => {
                 return (
                     <Text
                         key={mensagemAtual.id}
@@ -197,13 +201,13 @@ function MessageList(props) {
                             }
                         }}
                     >
-                     <Box
-                      styleSheet={{
-                        marginBottom: "8px",
-                        display: "flex",
-                        alignItems: "center"
-                      }}
-                    >
+                        <Box
+                            styleSheet={{
+                                marginBottom: "8px",
+                                display: "flex",
+                                alignItems: "center"
+                            }}
+                        >
                             <Image
                                 styleSheet={{
                                     width: '20px',
@@ -215,7 +219,7 @@ function MessageList(props) {
                                 src={`https://github.com/${mensagemAtual.de}.png`}
                             />
                             <Text tag="strong">
-                                {mensagemAtual.de} 
+                                {mensagemAtual.de}
                             </Text>
                             <Text
                                 styleSheet={{
@@ -224,15 +228,23 @@ function MessageList(props) {
                                     color: appConfig.theme.colors.neutrals[300],
                                 }}
                                 tag="span"
-                                
-                                >
+
+                            >
                                 {(new Date().toLocaleDateString())}
                             </Text>
                         </Box>
-                        {mensagemAtual.texto} 
+                        {mensagemAtual.texto.startsWith(':stickerURL:')
+                            ? (
+                                <Image 
+                                src={mensagemAtual.texto.replace(':stickerURL:', '')} />
+                                )
+                                : (
+                                mensagemAtual.texto
+                                )
+                            }
                     </Text>
                 )
             })}
-            </Box>
+        </Box>
     )
 }

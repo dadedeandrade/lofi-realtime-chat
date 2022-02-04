@@ -4,3 +4,11 @@ Desafios:
 -- Botao de X no canto superior direito 
     dica: Filter() de um jeito que ela tira o item que bate com alguma regra
     -- Quebrar em funcoes menores e refatorar a integração com DB
+--Botão de delete
+
+Pendencias:
+--Conferir funcionamento em produção
+--Data das mensagens antigas
+--Sticker Ninja
+--Corrigir bug de 2 mensagens rapidas
+--Personalizar do meu jeitinho
