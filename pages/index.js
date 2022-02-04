@@ -55,7 +55,7 @@ function UserImage(props) {
 
 
 export default function PaginaInicial() {
-  const [username, setUsername] = useState('andradeviniicius');
+  const [username, setUsername] = useState('');
   // const [image, setImage] = useState(`https://github.com/${username}.png`)
   const roteamento = useRouter()
   console.log(roteamento)
