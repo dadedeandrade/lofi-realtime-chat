@@ -23,8 +23,8 @@ export function ButtonSendSticker(props) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: appConfig.theme.colors.neutrals[300],
-          filter: isOpen ? 'grayscale(0)' : 'grayscale(1)',
+          backgroundColor: appConfig.theme.colors.primary[300],
+          filter: isOpen ? 'grayscale(0)' : 'grayscale(0)',
           hover: {
             filter: 'grayscale(0)',
           }
@@ -68,8 +68,7 @@ export function ButtonSendSticker(props) {
               flexWrap: 'wrap',
               justifyContent: 'space-between',
               flex: 1,
-              paddingTop: '16px',
-              overflow: 'scroll',
+              paddingTop: '16px'
             }}
           >
             {appConfig.stickers.map((sticker) => (

@@ -14,7 +14,6 @@ const dbSupaInteraction = createClient(SUPA_URL, SUPA_KEY)
 export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('')
     const [messageList, setMessageList] = React.useState([])
-    // console.log('Message list ' + messageList)
 
     function listenerSupaBase(addMsg){
         return dbSupaInteraction
@@ -28,16 +27,12 @@ export default function ChatPage() {
     
     const roteamento = useRouter()
     const loggedUser = roteamento.query.username
-    // console.log(roteamento)
-    // console.log(loggedUser)
-    
 
     // Por padrao o useeffect roda qnd a pagina carrega
     // Caso queira onChange basta colocar a variavel onchange na entrada secundaria array
     React.useEffect(() => {
         dbSupaInteraction.from('mesHis').select('*').order('id', { ascending: false }).then(({ data }) => {
             setMessageList(data);
-            // console.log(data)
         })
         listenerSupaBase((novaMensagem)=>{
             console.log('novamensagem: '+novaMensagem);
@@ -54,13 +49,13 @@ export default function ChatPage() {
         const mensagem = {
             id: messageList.length + 1,
             de: loggedUser,
-            texto: novaMensagem
+            texto: novaMensagem,
+            created_at: (new Date()).toLocaleDateString()
         }
+        console.log(mensagem)
         dbSupaInteraction.from('mesHis').insert([mensagem])
         .then(({ data }) => {
             console.log('Resposta handleNewMessage:::: ' + data)
-            
-
         })
 
         setMensagem('');
@@ -72,8 +67,9 @@ export default function ChatPage() {
             styleSheet={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backgroundColor: appConfig.theme.colors.primary[500],
-                backgroundImage: `url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)`,
+                backgroundImage: `url(https://cdna.artstation.com/p/assets/images/images/018/836/268/large/fajar-fazriansyah-master-10.jpg?1560916155)`,
                 backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
+                backgroundPosition: 'right',
                 color: appConfig.theme.colors.neutrals['000']
             }}
         >
@@ -85,9 +81,10 @@ export default function ChatPage() {
                     boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
                     borderRadius: '5px',
                     backgroundColor: appConfig.theme.colors.neutrals[700],
+                    transition: 0.2,
                     height: '100%',
-                    maxWidth: '95%',
-                    maxHeight: '95vh',
+                    maxWidth: '55%',
+                    maxHeight: '75vh',
                     padding: '32px',
                 }}
             >
@@ -158,7 +155,14 @@ export default function ChatPage() {
 function Header() {
     return (
         <>
-            <Box styleSheet={{ width: '100%', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
+            <Box styleSheet={{ 
+                width: '100%',
+                 marginBottom: '16px',
+                  display: 'flex',
+                   alignItems: 'center',
+                    justifyContent: 'space-between'
+                     }}
+             >
                 <Text variant='heading5'>
                     Chat
                 </Text>
@@ -175,6 +179,7 @@ function Header() {
 
 function MessageList(props) {
     // const messageList  = props.messageList 
+    var date = new Date("December 17, 1995 03:24:00");
     return (
         <Box
             tag="ul"
@@ -217,6 +222,9 @@ function MessageList(props) {
                                     marginRight: '8px',
                                 }}
                                 src={`https://github.com/${mensagemAtual.de}.png`}
+
+
+                                
                             />
                             <Text tag="strong">
                                 {mensagemAtual.de}
@@ -228,9 +236,9 @@ function MessageList(props) {
                                     color: appConfig.theme.colors.neutrals[300],
                                 }}
                                 tag="span"
-
-                            >
-                                {(new Date().toLocaleDateString())}
+                                
+                                >
+                                {mensagemAtual.created_at}
                             </Text>
                         </Box>
                         {mensagemAtual.texto.startsWith(':stickerURL:')

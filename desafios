@@ -1,14 +1,28 @@
 Desafios:
 
--- Botão de OK
--- Botao de X no canto superior direito 
+[ ]  Botão de OK
+[ ]  Botao de X no canto superior direito 
     dica: Filter() de um jeito que ela tira o item que bate com alguma regra
     -- Quebrar em funcoes menores e refatorar a integração com DB
---Botão de delete
+[ ] Botão de delete
 
 Pendencias:
---Conferir funcionamento em produção
---Data das mensagens antigas
---Sticker Ninja
---Corrigir bug de 2 mensagens rapidas
---Personalizar do meu jeitinho
+[X] Conferir funcionamento em produção
+[X] Erro classsName 
+[ ] Transformar componentes em arquivos 
+[ ] Data das mensagens antigas
+[ ] Sticker Ninja
+[X] Corrigir bug de 2 mensagens rapidas
+[+-] Personalizar do meu jeitinho
+    [ ] Personalizar barra de rolagem Chat
+    [ ] Personalizar barra de rolagem stickers
+    [ ] Fazer efeito de vidro background
+    [ ]  
+    [ ] 
+
+[ ] Filtro em frases maliciosas
+[ ] Imagem para usuarios inexistentes
+[ ] Mostrar usuario logado
+[ ] Separar os arquivos
+
+[ ] Warning: Encountered two children with the same key, `10`

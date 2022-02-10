@@ -21,7 +21,7 @@ function Titulo(props) {
 }
 function UserImage(props) {
   const src = props.src;
-
+  
   if(src.length>=26){
     return (
       <>
@@ -51,6 +51,7 @@ function UserImage(props) {
     )
   }
   
+  
 }
 
 
@@ -65,8 +66,8 @@ export default function PaginaInicial() {
       <Box
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          backgroundColor: appConfig.theme.colors.primary[500],
-          backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+          backgroundColor: appConfig.theme.colors.neutrals[500],
+          backgroundImage: 'url(https://cdnb.artstation.com/p/assets/images/images/029/320/295/original/bogdan-mb0sco-coffeeanim.gif?1601147277)',
           backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
         }}
       >
@@ -74,7 +75,7 @@ export default function PaginaInicial() {
           styleSheet={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'space-around',
             flexDirection: {
               xs: 'column',
               sm: 'row',
@@ -102,8 +103,8 @@ export default function PaginaInicial() {
               width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
             }}
           >
-            <Titulo tag="h2">Boas vindas de volta!</Titulo>
-            <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
+            <Titulo tag="h2">🍃 Chillin Thrilling 🍃</Titulo>
+            <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[100] }}>
               {appConfig.name}
             </Text>
 
@@ -117,6 +118,7 @@ export default function PaginaInicial() {
                   backgroundColor: appConfig.theme.colors.neutrals[800],
                 }
               }}
+              placeholder='Insert your github user here to join the chat :)'
               onChange={
                 function(event){
                   const valor = event.target.value
@@ -156,24 +158,11 @@ export default function PaginaInicial() {
               minHeight: '240px',
             }}
           >
-            {/* Desafio Aula2 */}
-            {/* Só mostrar img se tiver +2 caracteres */}
             
             <UserImage
-              src={`https://github.com/${username}.png`}>
-
-            </UserImage>
-            
-            
-            {/* <Image
-              styleSheet={{
-                borderRadius: '50%',
-                marginBottom: '16px',
-              }}
-              src={`https://github.com/${username}.png`}
-            /> */}
-            
-            
+              // onError={this.addDefaultSrc}
+              src={`https://github.com/${username}.png`}            
+            />            
             
             <Text
               variant="body4"

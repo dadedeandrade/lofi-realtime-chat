@@ -1,5 +1,5 @@
 {
-  "name": "Discord - Alura Matrix",
+  "name": "Discord Clone - Coffe break",
   "stickers": [
     "http://2.bp.blogspot.com/-d21tffsTIQo/U_H9QjC69gI/AAAAAAAAKqM/wnvOyUr6a_I/s1600/Pikachu%2B2.gif",
     "https://media1.giphy.com/media/BdghqxNFV4efm/200.gif",
@@ -12,15 +12,15 @@
     "colors": {
       "primary": {
         "050": "#E3F9E5",
-        "100": "#C1EAC5",
-        "200": "#A3D9A5",
-        "300": "#7BC47F",
-        "400": "#57AE5B",
-        "500": "#3F9142",
-        "600": "#2F8132",
-        "700": "#207227",
-        "800": "#0E5814",
-        "900": "#05400A"
+        "100": "#89B6E7",
+        "200": "#7ba4d1",
+        "300": "#6f94bd",
+        "400": "#6384a8",
+        "500": "#577494",
+        "600": "#4a627d",
+        "700": "#3e536b",
+        "800": "#2f4052",
+        "900": "#1f2936"
       },
       "neutrals": {
         "000": "#FFFFFF",
