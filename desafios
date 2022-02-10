@@ -10,6 +10,7 @@ Pendencias:
 [X] Conferir funcionamento em produção
 [X] Erro classsName 
 [ ] Transformar componentes em arquivos 
+[ ] Sessão pra login sem usuario  
 [ ] Data das mensagens antigas
 [ ] Sticker Ninja
 [X] Corrigir bug de 2 mensagens rapidas
@@ -17,7 +18,7 @@ Pendencias:
     [ ] Personalizar barra de rolagem Chat
     [ ] Personalizar barra de rolagem stickers
     [ ] Fazer efeito de vidro background
-    [ ]  
+    [ ] Integrar com Spotify 
     [ ] 
 
 [ ] Filtro em frases maliciosas
