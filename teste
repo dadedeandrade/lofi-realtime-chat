@@ -1,0 +1,12 @@
+styleSheet : {
+margin : "16px"
+padding : "16px"
+color : "white"
+backgroundColor : {
+xs : "red"
+sm : "blue"
+md : "green"
+lg : "purple"
+xl : "black"
+}
+}
