@@ -7,9 +7,9 @@ import Link from 'next/link'
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 
 // Components
-import { Title } from '../src/components/title.js'
+import { Title } from '../src/components/Title.js'
 import { UserImage } from '../src/components/userImage'
-import Modal from "../src/components/modal"
+import Modal from "../src/components/Modal"
 
 // Style
 import appConfig from '../config.json'
