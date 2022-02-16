@@ -1,0 +1,37 @@
+import React from 'react';
+import { Box, Text, Button } from '@skynexui/components';
+import { useRouter } from 'next/router'
+
+
+export function Header() {
+    const roteamento = useRouter()
+    return (
+        <>
+            <Box styleSheet={{ 
+                width: '100%',
+                 marginBottom: '16px',
+                  display: 'flex',
+                   alignItems: 'center',
+                    justifyContent: 'space-between'
+                     }}
+             >
+                <Text variant='heading5'>Chat</Text>
+                <Box 
+                styleSheet={{
+                    textAlign: 'center'
+                }}>
+                    <Text variant='body4'>Você está logado como:</Text>
+                    <Text variant='body1'>{roteamento.query.username}</Text>
+                    
+                </Box>
+                
+                <Button
+                    variant='tertiary'
+                    colorVariant='neutral'
+                    label='Logout'
+                    href="/"
+                />
+            </Box>
+        </>
+    )
+}
