@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 
 // Components
-import { ButtonSendSticker } from '../src/components/ButtonSendSticker'
+import { ButtonSendSticker } from '../src/components/ButtonSendSticker.js'
 import { MessageList } from '../src/components/MessageList'
 import { Header } from '../src/components/Header'
 

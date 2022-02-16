@@ -8,7 +8,7 @@ import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 
 // Components
 import { Title } from '../src/components/Title.js'
-import { UserImage } from '../src/components/UserImage.js'
+import { UserImage } from '../src/components/UserImage'
 import Modal from "../src/components/Modal"
 
 // Style
