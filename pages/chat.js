@@ -1,14 +1,21 @@
-import { Box, Text, TextField, Image, Button } from '@skynexui/components';
+// React // Next
 import React from 'react';
-import appConfig from '../config.json';
 import { useRouter } from 'next/router'
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
-import { ButtonSendSticker } from '../src/components/buttonSendSticker'
+
+// Librarys
+import { Box, Text, TextField, Image, Button } from '@skynexui/components';
+
+// Components
+import { ButtonSendSticker } from '../src/components/ButtonSendSticker'
 import { MessageList } from '../src/components/MessageList'
+import { Header } from '../src/components/Header'
 
-
+// Style
+import appConfig from '../config.json';
 import styles from '../styles/glassMorphism.module.css'
 
+// Database
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzgxMTE1NywiZXhwIjoxOTU5Mzg3MTU3fQ.wfDaJbPrC2EILmZl8R7tHgeTxIeTFx7m-i_c1gMTJK0'
 const SUPA_URL = 'https://jerfaxeghnnbhfxvvucu.supabase.co'
 const dbSupaInteraction = createClient(SUPA_URL, SUPA_KEY)
@@ -155,37 +162,5 @@ export default function ChatPage() {
                 </Box>
             </Box>
         </Box>
-    )
-}
-function Header() {
-    const roteamento = useRouter()
-    return (
-        <>
-            <Box styleSheet={{ 
-                width: '100%',
-                 marginBottom: '16px',
-                  display: 'flex',
-                   alignItems: 'center',
-                    justifyContent: 'space-between'
-                     }}
-             >
-                <Text variant='heading5'>Chat</Text>
-                <Box 
-                styleSheet={{
-                    textAlign: 'center'
-                }}>
-                    <Text variant='body4'>Você está logado como:</Text>
-                    <Text variant='body1'>{roteamento.query.username}</Text>
-                    
-                </Box>
-                
-                <Button
-                    variant='tertiary'
-                    colorVariant='neutral'
-                    label='Logout'
-                    href="/"
-                />
-            </Box>
-        </>
     )
 }

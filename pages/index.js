@@ -1,18 +1,22 @@
+// React // Next
 import { useState } from 'react';
-
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
+// Librarys
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 
+// Components
 import { Title } from '../src/components/Title.js'
 import { UserImage } from '../src/components/UserImage.js'
-import appConfig from '../config.json'
 import Modal from "../src/components/Modal"
 
+// Style
+import appConfig from '../config.json'
 
 
-export default function PaginaInicial() {
+
+export default function HomePage() {
   const [username, setUsername] = useState('');
   const [showModal, setShowModal] = useState(false)
   const roteamento = useRouter()

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Text, Image } from '@skynexui/components';
 import appConfig from '../../config.json';
+// import styles from '../../styles/scrollbar.module.css'
 
 export function MessageList(props) {
     // const messageList  = props.messageList 

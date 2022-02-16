@@ -28,12 +28,13 @@ function GlobalStyle() {
   }
 
 export default function MyApp({ Component,pageProps }) {
-    console.log('Roda em todas as paginas!')
+    console.log('Console começa aqui')
     return (
-            <>
+      <>
                 <GlobalStyle />
                 <Component {...pageProps}    />
             </>
     
     )
-}
+  }
+  console.log('Termina aqui')
