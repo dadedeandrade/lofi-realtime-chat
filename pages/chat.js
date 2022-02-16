@@ -7,8 +7,8 @@ import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 
 // Components
 import { ButtonSendSticker } from '../src/components/buttonSendSticker.js'
-import { MessageList } from '../src/components/MessageList'
-import { Header } from '../src/components/Header'
+import { MessageList } from '../src/components/messageList.js'
+import { Header } from '../src/components/header.js'
 
 // Style
 import appConfig from '../config.json';
