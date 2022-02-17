@@ -1,11 +1,12 @@
 import React from 'react';
 import appConfig from '../../config.json';
 import Image from 'next/image'
+import { Text } from '@skynexui/components';
 
 export function UserImage(props) {
   const src = props.src;
   
-  if(src.length>=20 || src==='/randomUser.jpg'){
+  if(src.length>=24 || src==='/randomUser.jpg'){
     return (
       <div>
       <img
@@ -24,15 +25,23 @@ export function UserImage(props) {
       `}</style>
       
       </div>
-                   
-      )
-  } else {
-    return (
-      <>
-          {/* <Image
-          src="/randomUser.png" alt="randomUser" width="458" height="458"
-          /> */}
-
+        
+        )
+      } else {
+        return (
+          <>
+          <img
+          src='/randomUser.jpg'
+          />
+          <style jsx>{`
+          img {
+            border-radius: 50%;
+            
+            margin-bottom: 16px;
+            width:100%;
+            height:100%;
+          }
+          `}</style>    
       </>
       )
     }  

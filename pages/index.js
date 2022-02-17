@@ -38,7 +38,7 @@ export default function HomePage() {
           backgrou: 'red'
         }}
       >
-        {!isRandomUser &&            
+        {!isRandomUser &&
           <Box
             styleSheet={{
               display: 'flex',
@@ -71,11 +71,11 @@ export default function HomePage() {
                 width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
               }}
             >
-              <Title tag="h2">🍃 Chillin Thrilling 🍃</Title>
+              <Title tag="h2">🍃 Chillin 🍃</Title>
               <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
                 {appConfig.name}
               </Text>
-  
+
               <TextField
                 fullWidth
                 textFieldColors={{
@@ -106,7 +106,7 @@ export default function HomePage() {
                   mainColorStrong: appConfig.theme.colors.primary[600],
                 }}
               />
-              <Text 
+              <Text
                 variant='body4'
                 styleSheet={{
                   color: appConfig.theme.colors.neutrals[300],
@@ -116,26 +116,28 @@ export default function HomePage() {
                 Dont have a github account?
                 {/* Since Next dont support onClick method in <LinK> tag thats a workaround i found :) */}
                 <Link href="/">
-                    <div>
-                      <a 
-                        onClick={()=>{setRandomUser(true)}}
-                        >
-                        <style jsx>{`
-                          a:link {
-
+                  <div>
+                    <a
+                      onClick={() => { setRandomUser(true) }}
+                    >
+                      <style jsx>{`
+                          a {
+                            color: #577494;
+                            cursor: pointer;
+                          }                                             a:hover {
+                            color: #89B6E7;
                           }
-
                         `}</style>
-                        Click Here!  
-                      </a>  
-                    </div>        
+                      Click Here!
+                    </a>
+                  </div>
                 </Link>
-                
+
               </Text>
             </Box>
             {/* Form */}
-  
-  
+
+
             {/* Photo Area */}
             <Box
               styleSheet={{
@@ -152,30 +154,35 @@ export default function HomePage() {
                 minHeight: '240px',
               }}
             >
-  
+
               <UserImage
-                // onError={this.addDefaultSrc}
                 src={`https://github.com/${username}.png`}
-              />
-  
-              <Text
-                variant="body4"
-                styleSheet={{
-                  color: appConfig.theme.colors.neutrals[200],
-                  backgroundColor: appConfig.theme.colors.neutrals[900],
-                  padding: '3px 10px',
-                  borderRadius: '1000px'
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src = '/randomUser.jpg';
                 }}
-              >
-                {username}
-              </Text>
+              />
+              {username.length > 0 &&
+                <Text
+                  variant="body4"
+                  styleSheet={{
+                    color: appConfig.theme.colors.neutrals[200],
+                    backgroundColor: appConfig.theme.colors.neutrals[900],
+                    padding: '3px 10px',
+                    borderRadius: '1000px'
+                  }}
+                >
+                  {username}
+                </Text>
+              }
             </Box>
             {/* Photo Area */}
           </Box>
-         }
-        {isRandomUser &&            
+        }
+        {isRandomUser &&
           <Box
             styleSheet={{
+              position: 'relative',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-around',
@@ -189,41 +196,48 @@ export default function HomePage() {
               backgroundColor: appConfig.theme.colors.neutrals[700],
             }}
           >
-            <Button 
-            iconName="arrowLeft"
-            styleSheet={{
-              position: 'absolute',
 
-            }}
-            onClick={()=>setRandomUser(false)}
-            />
-
+            {/* Formulário */}
             <Box
               as="form"
               onSubmit={function (infoDoEvento) {
                 infoDoEvento.preventDefault()
-                // 
-                // Dessa forma ele da reload de novo:
-                // window.location.href = '/chat'
-                // 
-                // Recurso do Next:
                 roteamento.push(`/chat?username=${username}`)
               }}
               styleSheet={{
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
                 justifyContent: 'center',
-                width: { xs: '100%', sm: '50%' }, 
-                textAlign: 'center', 
+                width: { xs: '100%', sm: '50%' },
+                textAlign: 'center',
                 marginBottom: '32px',
               }}
-            >
-              <Title tag="h2">🍃 Chillin Thrilling 🍃</Title>
+              >
+              
+                  <Box
+                  styleSheet={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-even',
+                    // textAlign: 'center',
+                    marginBottom: '32px',
+                  }}
+
+                  >
+                    <Button
+                      iconName="arrowLeft"
+                      onClick={() => setUsername(''), () => setRandomUser(false)}
+                    />
+
+                    <Title tag="h2">🍃 Chillin 🍃</Title>
+                  </Box>
+              
+
               <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
                 {appConfig.name}
               </Text>
-  
+
               <TextField
                 fullWidth
                 styleSheet={{
@@ -258,8 +272,8 @@ export default function HomePage() {
               />
             </Box>
             {/* Formulário */}
-  
-  
+
+
             {/* Photo Area */}
             <Box
               styleSheet={{
@@ -276,29 +290,31 @@ export default function HomePage() {
                 minHeight: '240px',
               }}
             >
-  
+
               <UserImage
                 // onError={this.addDefaultSrc}
                 // src={`https://github.com/${username}.png`}
                 src='/randomUser.jpg'
               />
-  
-              <Text
-                variant="body4"
-                styleSheet={{
-                  color: appConfig.theme.colors.neutrals[200],
-                  backgroundColor: appConfig.theme.colors.neutrals[900],
-                  padding: '3px 10px',
-                  borderRadius: '1000px'
-                }}
-              >
-                {username}
-              </Text>
+
+              {username.length > 0 &&
+                <Text
+                  variant="body4"
+                  styleSheet={{
+                    color: appConfig.theme.colors.neutrals[200],
+                    backgroundColor: appConfig.theme.colors.neutrals[900],
+                    padding: '3px 10px',
+                    borderRadius: '1000px'
+                  }}
+                >
+                  {username}
+                </Text>
+              }
             </Box>
             {/* Photo Area */}
           </Box>
-         }
-        
+        }
+
       </Box>
     </>
   );
