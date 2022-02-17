@@ -9,7 +9,6 @@ import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 // Components
 import { Title } from '../src/components/title.js'
 import { UserImage } from '../src/components/userImage.js'
-import Modal from "../src/components/modal.js"
 
 // Style
 import appConfig from '../config.json'
@@ -18,7 +17,7 @@ import appConfig from '../config.json'
 
 export default function HomePage() {
   const [username, setUsername] = useState('');
-  const [showModal, setShowModal] = useState(false)
+  const [isRandomUser, setRandomUser] = useState(false)
   const roteamento = useRouter()
   console.log(roteamento)
 
@@ -39,173 +38,267 @@ export default function HomePage() {
           backgrou: 'red'
         }}
       >
-        <Box
-          styleSheet={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            flexDirection: {
-              xs: 'column',
-              sm: 'row',
-            },
-            width: '100%', maxWidth: '700px',
-            borderRadius: '5px', padding: '32px', margin: '16px',
-            boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
-            backgroundColor: appConfig.theme.colors.neutrals[700],
-          }}
-        >
-          {/* Formulário */}
-          <Box
-            as="form"
-            onSubmit={function (infoDoEvento) {
-              infoDoEvento.preventDefault()
-              // 
-              // Dessa forma ele da reload de novo:
-              // window.location.href = '/chat'
-              // 
-              // Recurso do Next:
-              roteamento.push(`/chat?username=${username}`)
-            }}
-            styleSheet={{
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
-            }}
-          >
-            <Title tag="h2">🍃 Chillin Thrilling 🍃</Title>
-            <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
-              {appConfig.name}
-            </Text>
-
-            <TextField
-              fullWidth
-              textFieldColors={{
-                neutral: {
-                  textColor: appConfig.theme.colors.neutrals[200],
-                  mainColor: appConfig.theme.colors.neutrals[900],
-                  mainColorHighlight: appConfig.theme.colors.primary[500],
-                  backgroundColor: appConfig.theme.colors.neutrals[800],
-                }
-              }}
-              placeholder='Insert your github user here to join the chat :)'
-              onChange={
-                function (event) {
-                  const valor = event.target.value
-                  setUsername(valor)
-                  // setImage(valor)
-                }
-              }
-            />
-            <Button
-              type='submit'
-              label='Entrar com GitHub'
-              fullWidth
-              buttonColors={{
-                contrastColor: appConfig.theme.colors.neutrals["100"],
-                mainColor: appConfig.theme.colors.primary[500],
-                mainColorLight: appConfig.theme.colors.primary[400],
-                mainColorStrong: appConfig.theme.colors.primary[600],
-              }}
-            />
-
-            {/* <Button
-              type='submit'
-              label='Enter as a Guest'
-              fullWidth
-              buttonColors={{
-                contrastColor: appConfig.theme.colors.neutrals["000"],
-                mainColor: appConfig.theme.colors.primary[600],
-                mainColorLight: appConfig.theme.colors.primary[600],
-                mainColorStrong: appConfig.theme.colors.primary[800],
-              }}
-              styleSheet={{ marginTop: '6px'}}
-            /> */}
-            <Text 
-              variant='body4'
-              styleSheet={{
-                color: appConfig.theme.colors.neutrals[300],
-                marginTop: '5px',
-              }
-              }>
-              Dont have a github account?
-              {/* <Button
-                href="#"
-                onClick={() => setShowModal(true)}
-                label="Click here"
-                className="btn"
-                type='submit'
-              label='Enter as a Guest'
-              fullWidth
-              buttonColors={{
-                contrastColor: appConfig.theme.colors.neutrals["000"],
-                mainColor: appConfig.theme.colors.primary[600],
-                mainColorLight: appConfig.theme.colors.primary[600],
-                mainColorStrong: appConfig.theme.colors.primary[800],
-              }}
-              styleSheet={{ marginTop: '6px'}}>
-              </Button> */}
-              <Link 
-                href="#"
-                className="btn"
-                onClick={() => setShowModal(true)}
-                >
-                
-                Click Here!
-              </Link>
-              <Modal show={showModal} onClose={()=> setShowModal(false)}> 
-              <Box
-                as="form"
-                styleSheet={{
-                  display: 'flex', 
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                    justifyContent: 'center',
-                  width: { xs: '100%', sm: '50%' },
-                  textAlign: 'center',
-                    marginBottom: '32px',
-                }}
-              />
-              </Modal>
-            </Text>
-          </Box>
-          {/* Formulário */}
-
-
-          {/* Photo Area */}
+        {!isRandomUser &&            
           <Box
             styleSheet={{
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
-              maxWidth: '200px',
-              padding: '16px',
-              backgroundColor: appConfig.theme.colors.neutrals[800],
-              border: '1px solid',
-              borderColor: appConfig.theme.colors.neutrals[999],
-              borderRadius: '10px',
-              flex: 1,
-              minHeight: '240px',
+              justifyContent: 'space-around',
+              flexDirection: {
+                xs: 'column',
+                sm: 'row',
+              },
+              width: '100%', maxWidth: '700px',
+              borderRadius: '5px', padding: '32px', margin: '16px',
+              boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
+              backgroundColor: appConfig.theme.colors.neutrals[700],
             }}
           >
 
-            <UserImage
-              // onError={this.addDefaultSrc}
-              src={`https://github.com/${username}.png`}
-            />
-
-            <Text
-              variant="body4"
+            <Box
+              as="form"
+              onSubmit={function (infoDoEvento) {
+                infoDoEvento.preventDefault()
+                // 
+                // Dessa forma ele da reload de novo:
+                // window.location.href = '/chat'
+                // 
+                // Recurso do Next:
+                roteamento.push(`/chat?username=${username}`)
+              }}
               styleSheet={{
-                color: appConfig.theme.colors.neutrals[200],
-                backgroundColor: appConfig.theme.colors.neutrals[900],
-                padding: '3px 10px',
-                borderRadius: '1000px'
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
               }}
             >
-              {username}
-            </Text>
+              <Title tag="h2">🍃 Chillin Thrilling 🍃</Title>
+              <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
+                {appConfig.name}
+              </Text>
+  
+              <TextField
+                fullWidth
+                textFieldColors={{
+                  neutral: {
+                    textColor: appConfig.theme.colors.neutrals[200],
+                    mainColor: appConfig.theme.colors.neutrals[900],
+                    mainColorHighlight: appConfig.theme.colors.primary[500],
+                    backgroundColor: appConfig.theme.colors.neutrals[800],
+                  }
+                }}
+                placeholder='Insert your github user here to join the chat :)'
+                onChange={
+                  function (event) {
+                    const valor = event.target.value
+                    setUsername(valor)
+                    // setImage(valor)
+                  }
+                }
+              />
+              <Button
+                type='submit'
+                label='Entrar com GitHub'
+                fullWidth
+                buttonColors={{
+                  contrastColor: appConfig.theme.colors.neutrals["100"],
+                  mainColor: appConfig.theme.colors.primary[500],
+                  mainColorLight: appConfig.theme.colors.primary[400],
+                  mainColorStrong: appConfig.theme.colors.primary[600],
+                }}
+              />
+              <Text 
+                variant='body4'
+                styleSheet={{
+                  color: appConfig.theme.colors.neutrals[300],
+                  marginTop: '5px',
+                }
+                }>
+                Dont have a github account?
+                {/* Since Next dont support onClick method in <LinK> tag thats a workaround i found :) */}
+                <Link href="/">
+                    <div>
+                      <a 
+                        onClick={()=>{setRandomUser(true)}}
+                        >
+                        <style jsx>{`
+                          a:link {
+
+                          }
+
+                        `}</style>
+                        Click Here!  
+                      </a>  
+                    </div>        
+                </Link>
+                
+              </Text>
+            </Box>
+            {/* Form */}
+  
+  
+            {/* Photo Area */}
+            <Box
+              styleSheet={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                maxWidth: '200px',
+                padding: '16px',
+                backgroundColor: appConfig.theme.colors.neutrals[800],
+                border: '1px solid',
+                borderColor: appConfig.theme.colors.neutrals[999],
+                borderRadius: '10px',
+                flex: 1,
+                minHeight: '240px',
+              }}
+            >
+  
+              <UserImage
+                // onError={this.addDefaultSrc}
+                src={`https://github.com/${username}.png`}
+              />
+  
+              <Text
+                variant="body4"
+                styleSheet={{
+                  color: appConfig.theme.colors.neutrals[200],
+                  backgroundColor: appConfig.theme.colors.neutrals[900],
+                  padding: '3px 10px',
+                  borderRadius: '1000px'
+                }}
+              >
+                {username}
+              </Text>
+            </Box>
+            {/* Photo Area */}
           </Box>
-          {/* Photo Area */}
-        </Box>
+         }
+        {isRandomUser &&            
+          <Box
+            styleSheet={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+              flexDirection: {
+                xs: 'column',
+                sm: 'row',
+              },
+              width: '100%', maxWidth: '700px',
+              borderRadius: '5px', padding: '32px', margin: '16px',
+              boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
+              backgroundColor: appConfig.theme.colors.neutrals[700],
+            }}
+          >
+            <Button 
+            iconName="arrowLeft"
+            styleSheet={{
+              position: 'absolute',
+
+            }}
+            onClick={()=>setRandomUser(false)}
+            />
+
+            <Box
+              as="form"
+              onSubmit={function (infoDoEvento) {
+                infoDoEvento.preventDefault()
+                // 
+                // Dessa forma ele da reload de novo:
+                // window.location.href = '/chat'
+                // 
+                // Recurso do Next:
+                roteamento.push(`/chat?username=${username}`)
+              }}
+              styleSheet={{
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                width: { xs: '100%', sm: '50%' }, 
+                textAlign: 'center', 
+                marginBottom: '32px',
+              }}
+            >
+              <Title tag="h2">🍃 Chillin Thrilling 🍃</Title>
+              <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
+                {appConfig.name}
+              </Text>
+  
+              <TextField
+                fullWidth
+                styleSheet={{
+                  textAlign: 'center'
+                }}
+                textFieldColors={{
+                  neutral: {
+                    textColor: appConfig.theme.colors.neutrals[200],
+                    mainColor: appConfig.theme.colors.neutrals[900],
+                    mainColorHighlight: appConfig.theme.colors.primary[500],
+                    backgroundColor: appConfig.theme.colors.neutrals[800],
+                  }
+                }}
+                placeholder='Insert a name to join the chat :)'
+                onChange={
+                  function (event) {
+                    const valor = event.target.value
+                    setUsername(valor)
+                  }
+                }
+              />
+              <Button
+                type='submit'
+                label='Entrar'
+                fullWidth
+                buttonColors={{
+                  contrastColor: appConfig.theme.colors.neutrals["100"],
+                  mainColor: appConfig.theme.colors.primary[500],
+                  mainColorLight: appConfig.theme.colors.primary[400],
+                  mainColorStrong: appConfig.theme.colors.primary[600],
+                }}
+              />
+            </Box>
+            {/* Formulário */}
+  
+  
+            {/* Photo Area */}
+            <Box
+              styleSheet={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                maxWidth: '200px',
+                padding: '16px',
+                backgroundColor: appConfig.theme.colors.neutrals[800],
+                border: '1px solid',
+                borderColor: appConfig.theme.colors.neutrals[999],
+                borderRadius: '10px',
+                flex: 1,
+                minHeight: '240px',
+              }}
+            >
+  
+              <UserImage
+                // onError={this.addDefaultSrc}
+                // src={`https://github.com/${username}.png`}
+                src='/randomUser.jpg'
+              />
+  
+              <Text
+                variant="body4"
+                styleSheet={{
+                  color: appConfig.theme.colors.neutrals[200],
+                  backgroundColor: appConfig.theme.colors.neutrals[900],
+                  padding: '3px 10px',
+                  borderRadius: '1000px'
+                }}
+              >
+                {username}
+              </Text>
+            </Box>
+            {/* Photo Area */}
+          </Box>
+         }
+        
       </Box>
     </>
   );

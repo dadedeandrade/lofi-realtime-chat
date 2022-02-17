@@ -5,12 +5,11 @@ import Image from 'next/image'
 export function UserImage(props) {
   const src = props.src;
   
-  if(src.length>=20){
+  if(src.length>=20 || src==='/randomUser.jpg'){
     return (
-      <>
+      <div>
       <img
       src={src}
-      
       />
       
             
@@ -24,7 +23,7 @@ export function UserImage(props) {
       }
       `}</style>
       
-      </>
+      </div>
                    
       )
   } else {
