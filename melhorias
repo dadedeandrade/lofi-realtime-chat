@@ -9,6 +9,19 @@ Trabalhando agora - 11h16
 [X] Conferir funcionamento em produção
 [X] Erro classsName 
 [ ] Sessão pra login sem usuario  
+    Login github
+    [ ] Estilizar Click Here
+    [ ] Imagem padrão quando não houver usuário
+    [ ] Sumir Campo de texto quando não houver usuario
+    [ ] Ao voltar do randomUser > githubUser resetar o que foi escrito  no campo de username
+
+    Login randomUser
+    [ ] Acertar botão de voltar para login github
+    [ ] Poder selecionar imagem de perfil
+        [ ] Masculino lofi
+        [ ] Feminino lofi
+    [ ] Gender
+
 [ ] Data das mensagens antigas
 [X] Corrigir bug de 2 mensagens rapidas
 [+-] Personalizar do meu jeitinho
