@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 // Librarys
-import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import { Box, Button, Text, TextField, Icon } from '@skynexui/components';
 
 // Components
 import { Title } from '../src/components/title.js'
@@ -118,7 +118,7 @@ export default function HomePage() {
                 <Link href="/">
                   <div>
                     <a
-                      onClick={() => { setRandomUser(true) }}
+                      onClick={() => {setUsername(''), setRandomUser(true) }}
                     >
                       <style jsx>{`
                           a {
@@ -157,10 +157,6 @@ export default function HomePage() {
 
               <UserImage
                 src={`https://github.com/${username}.png`}
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null;
-                  currentTarget.src = '/randomUser.jpg';
-                }}
               />
               {username.length > 0 &&
                 <Text
@@ -211,7 +207,7 @@ export default function HomePage() {
                 justifyContent: 'center',
                 width: { xs: '100%', sm: '50%' },
                 textAlign: 'center',
-                marginBottom: '32px',
+                marginBottom: '65px',
               }}
               >
               
@@ -219,18 +215,34 @@ export default function HomePage() {
                   styleSheet={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-even',
+                    width:'100%',
+                    justifyContent:'space-between',
                     // textAlign: 'center',
-                    marginBottom: '32px',
                   }}
 
                   >
-                    <Button
-                      iconName="arrowLeft"
-                      onClick={() => setUsername(''), () => setRandomUser(false)}
+                    <Icon 
+                    label="Icon Component" 
+                    name="FaArrowLeft"
+                    onClick={() => {setUsername(''), setRandomUser(false) }}
+                    styleSheet={{
+                      color:'white',
+                      cursor:'pointer',
+                    }}
                     />
 
-                    <Title tag="h2">🍃 Chillin 🍃</Title>
+                    <Title tag="h2" styleSheet={{position:'absolute'}}>🍃 Chillin 🍃</Title>
+
+                    
+                    <Icon 
+                    label="Icon Component" 
+                    name="FaArrowLeft"
+                    onClick={() => {setUsername(''), setRandomUser(false) }}
+                    styleSheet={{
+                      color:'rgba(0,0,0,0)',
+                    }}
+                    />
+
                   </Box>
               
 

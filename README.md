@@ -9,12 +9,16 @@ Foi feito alterações na estrutura para adicionar funcionalidades, bibliotecas 
     Login github
     - [X] Estilizar Click Here
     - [X] Imagem padrão quando não houver usuário
-    - [ ] Resolver onError
+    - [ ] Lidar com non-existent users
+        - [ ] Imagem para usuario aleatorio
+        - [ ] Aplicar um nome aleatorio caso o usuario tente entrar com usuario invalido 
+
     - [X] Sumir Campo de texto quando não houver usuario
-    - [ ] Ao voltar do randomUser > githubUser resetar o que foi escrito  no campo de username
+    - [X] Ao voltar do randomUser > githubUser resetar o que foi escrito  no campo de username
 
     Login randomUser
-    - [ ] Acertar botão de voltar para login github
+    - [ ] Transição para tela
+    - [X] Acertar botão de voltar para login github
     - [ ] Poder selecionar imagem de perfil
         - [ ] Bicho1 lofi
         - [ ] Bicho2 lofi
@@ -29,7 +33,7 @@ Foi feito alterações na estrutura para adicionar funcionalidades, bibliotecas 
         Glassmorphism OneBitCode
 - [X] Imagem para usuarios inexistentes
 - [X] Mostrar usuario logado
-- [ ] Warning: Encountered two children with the same key, `10`
+- [X] Warning: Encountered two children with the same key
 
 
 ### Melhorias

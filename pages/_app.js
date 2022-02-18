@@ -28,7 +28,6 @@ function GlobalStyle() {
   }
 
 export default function MyApp({ Component,pageProps }) {
-    console.log('Console começa aqui')
     return (
       <>
                 <GlobalStyle />
@@ -37,4 +36,3 @@ export default function MyApp({ Component,pageProps }) {
     
     )
   }
-  console.log('Termina aqui')

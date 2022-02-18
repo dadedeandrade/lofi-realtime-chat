@@ -5,12 +5,15 @@ import { Text } from '@skynexui/components';
 
 export function UserImage(props) {
   const src = props.src;
-  
   if(src.length>=24 || src==='/randomUser.jpg'){
     return (
       <div>
       <img
       src={src}
+      onError={({ currentTarget }) => {
+        currentTarget.onError = null;
+        currentTarget.src = '/randomUser.png';
+      }}  
       />
       
             
