@@ -34,9 +34,6 @@ export default function HomePage() {
           backgroundSize: 'cover',
           backgroundBlendMode: 'multiply',
         }}
-        style={{
-          backgrou: 'red'
-        }}
       >
         {!isRandomUser &&
           <Box
@@ -54,16 +51,11 @@ export default function HomePage() {
               backgroundColor: appConfig.theme.colors.neutrals[700],
             }}
           >
-
+            {/* Form */}
             <Box
               as="form"
               onSubmit={function (infoDoEvento) {
                 infoDoEvento.preventDefault()
-                // 
-                // Dessa forma ele da reload de novo:
-                // window.location.href = '/chat'
-                // 
-                // Recurso do Next:
                 roteamento.push(`/chat?username=${username}`)
               }}
               styleSheet={{
@@ -106,34 +98,23 @@ export default function HomePage() {
                   mainColorStrong: appConfig.theme.colors.primary[600],
                 }}
               />
-              <Text
-                variant='body4'
-                styleSheet={{
-                  color: appConfig.theme.colors.neutrals[300],
-                  marginTop: '5px',
-                }
-                }>
-                Dont have a github account?
-                {/* Since Next dont support onClick method in <LinK> tag thats a workaround i found :) */}
-                <Link href="/">
-                  <div>
-                    <a
-                      onClick={() => {setUsername(''), setRandomUser(true) }}
-                    >
-                      <style jsx>{`
-                          a {
-                            color: #577494;
-                            cursor: pointer;
-                          }                                             a:hover {
-                            color: #89B6E7;
-                          }
-                        `}</style>
-                      Click Here!
-                    </a>
-                  </div>
-                </Link>
 
-              </Text>
+
+
+
+              <Button
+                type='submit'
+                label='Enter as a Guest'
+                fullWidth
+                buttonColors={{
+                  contrastColor: appConfig.theme.colors.neutrals["000"],
+                  mainColor: appConfig.theme.colors.primary[600],
+                  mainColorLight: appConfig.theme.colors.primary[600],
+                  mainColorStrong: appConfig.theme.colors.primary[800],
+                }}
+                styleSheet={{ marginTop: '6px' }}
+                onClick={() => {setUsername(''), setRandomUser(true) }}
+              />
             </Box>
             {/* Form */}
 
@@ -157,9 +138,10 @@ export default function HomePage() {
 
               <UserImage
                 src={`https://github.com/${username}.png`}
-              />
+              />,
               {username.length > 0 &&
-                <Text
+              
+              <Text
                   variant="body4"
                   styleSheet={{
                     color: appConfig.theme.colors.neutrals[200],
@@ -175,6 +157,8 @@ export default function HomePage() {
             {/* Photo Area */}
           </Box>
         }
+
+
         {isRandomUser &&
           <Box
             styleSheet={{
@@ -209,42 +193,42 @@ export default function HomePage() {
                 textAlign: 'center',
                 marginBottom: '65px',
               }}
+            >
+
+              <Box
+                styleSheet={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: '100%',
+                  justifyContent: 'space-between',
+                  // textAlign: 'center',
+                }}
+
               >
-              
-                  <Box
+                <Icon
+                  label="Icon Component"
+                  name="FaArrowLeft"
+                  onClick={() => { setUsername(''), setRandomUser(false) }}
                   styleSheet={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    width:'100%',
-                    justifyContent:'space-between',
-                    // textAlign: 'center',
+                    color: 'white',
+                    cursor: 'pointer',
                   }}
+                />
 
-                  >
-                    <Icon 
-                    label="Icon Component" 
-                    name="FaArrowLeft"
-                    onClick={() => {setUsername(''), setRandomUser(false) }}
-                    styleSheet={{
-                      color:'white',
-                      cursor:'pointer',
-                    }}
-                    />
+                <Title tag="h2" styleSheet={{ position: 'absolute' }}>🍃 Chillin 🍃</Title>
 
-                    <Title tag="h2" styleSheet={{position:'absolute'}}>🍃 Chillin 🍃</Title>
 
-                    
-                    <Icon 
-                    label="Icon Component" 
-                    name="FaArrowLeft"
-                    onClick={() => {setUsername(''), setRandomUser(false) }}
-                    styleSheet={{
-                      color:'rgba(0,0,0,0)',
-                    }}
-                    />
+                <Icon
+                  label="Icon Component"
+                  name="FaArrowLeft"
+                  onClick={() => { setUsername(''), setRandomUser(false) }}
+                  styleSheet={{
+                    color: 'rgba(0,0,0,0)',
+                  }}
+                />
 
-                  </Box>
-              
+              </Box>
+
 
               <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
                 {appConfig.name}
@@ -263,13 +247,14 @@ export default function HomePage() {
                     backgroundColor: appConfig.theme.colors.neutrals[800],
                   }
                 }}
-                placeholder='Insert a name to join the chat :)'
+                placeholder='Your name will appear here :)'
                 onChange={
                   function (event) {
                     const valor = event.target.value
-                    setUsername(valor)
+                    setUsername(valor+' (Convidado)')
                   }
                 }
+
               />
               <Button
                 type='submit'
@@ -304,9 +289,8 @@ export default function HomePage() {
             >
 
               <UserImage
-                // onError={this.addDefaultSrc}
-                // src={`https://github.com/${username}.png`}
                 src='/randomUser.jpg'
+                
               />
 
               {username.length > 0 &&
