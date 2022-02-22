@@ -182,6 +182,7 @@ export default function HomePage() {
               as="form"
               onSubmit={function (infoDoEvento) {
                 infoDoEvento.preventDefault()
+
                 roteamento.push(`/chat?username=${username}`)
               }}
               styleSheet={{
@@ -247,11 +248,11 @@ export default function HomePage() {
                     backgroundColor: appConfig.theme.colors.neutrals[800],
                   }
                 }}
-                placeholder='Your name will appear here :)'
+                placeholder='Escolha um nome legal :)'
                 onChange={
                   function (event) {
                     const valor = event.target.value
-                    setUsername(valor+' (Convidado)')
+                    setUsername(valor)
                   }
                 }
 
@@ -289,8 +290,7 @@ export default function HomePage() {
             >
 
               <UserImage
-                src='/randomUser.jpg'
-                
+                src='/randomUser.png'
               />
 
               {username.length > 0 &&

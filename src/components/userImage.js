@@ -2,21 +2,21 @@ import React from 'react';
 import appConfig from '../../config.json';
 import Image from 'next/image'
 import { Text } from '@skynexui/components';
+import { useState } from 'react';
 
 export function UserImage(props) {
   const src = props.src;
   // Length seria o total da URL
-  if (src.length >= 25 || src === '/randomUser.jpg') {
+  if (src.length >= 25 || src === '/randomUser.png') {
     return (
       <div>
         <img
           src={src}
           onError={({ currentTarget }) => {
             currentTarget.onError = null
-            currentTarget.src = '/randomUser.jpg';
+            currentTarget.src = '/randomUser.png';
           }}
         />
-
         <style jsx>{`
       img {
         border-radius: 50%;
@@ -24,11 +24,8 @@ export function UserImage(props) {
         width:100%;
         height:100%;
       }
-
       `}</style>
-
       </div>
-
     )
   } else {
     return (
@@ -42,7 +39,7 @@ export function UserImage(props) {
             borderRadius: '1000px'
           }}
         >
-          <p>Waiting a user
+          <p>Waiting a user to be inserted
           <span className='dot1'> .</span>
           <span className='dot2'>.</span>
           <span className='dot3'>.</span>         
@@ -50,6 +47,9 @@ export function UserImage(props) {
         </Text>
 
           <style jsx>{`
+          p{
+            text-align:center;
+          }
           @keyframes blink {
             0% { opacity: 0; }
             50% { opacity: 1; }

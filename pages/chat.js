@@ -16,8 +16,8 @@ import styles from '../styles/glassMorphism.module.css'
 
 // Database
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
-const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzgxMTE1NywiZXhwIjoxOTU5Mzg3MTU3fQ.wfDaJbPrC2EILmZl8R7tHgeTxIeTFx7m-i_c1gMTJK0'
 const SUPA_URL = 'https://jerfaxeghnnbhfxvvucu.supabase.co'
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzgxMTE1NywiZXhwIjoxOTU5Mzg3MTU3fQ.wfDaJbPrC2EILmZl8R7tHgeTxIeTFx7m-i_c1gMTJK0'
 const dbSupaInteraction = createClient(SUPA_URL, SUPA_KEY)
 
 
@@ -26,6 +26,7 @@ export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('')
     const [messageList, setMessageList] = React.useState([])
 
+    // When this function is called it checks if there is any new messages before 
     function listenerSupaBase(addMsg){
         return dbSupaInteraction
             .from('mesHis')
@@ -92,7 +93,7 @@ export default function ChatPage() {
                     flex: 1,
                     boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
                     borderRadius: '5px',
-                    // backgroundColor: appConfig.theme.colors.neutrals[700],
+                    backgroundColor: appConfig.theme.colors.neutrals[700],
                     transition: 0.2,
                     height: '100%',
                     maxWidth: '55%',
