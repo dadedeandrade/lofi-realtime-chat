@@ -28,7 +28,7 @@ export function MessageList(props) {
                             padding: '6px',
                             marginBottom: '12px',
                             hover: {
-                                backgroundColor: appConfig.theme.colors.neutrals[700],
+                                backgroundColor: appConfig.theme.colors.neutrals[7000],
                             }
                         }}
                     >

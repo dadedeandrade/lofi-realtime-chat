@@ -201,8 +201,7 @@ export default function HomePage() {
               as="form"
               onSubmit={function (infoDoEvento) {
                 infoDoEvento.preventDefault()
-
-                roteamento.push(`/chat?username=${username}`)
+                roteamento.push(`/chat?username=${username+' (Convidado)'}`)
               }}
               styleSheet={{
                 display: 'flex',
