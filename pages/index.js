@@ -68,6 +68,15 @@ export default function HomePage() {
                 {appConfig.name}
               </Text>
 
+
+              <Box
+                styleSheet={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  width:'100%'
+              }}
+              >
+
               <TextField
                 fullWidth
                 textFieldColors={{
@@ -89,7 +98,7 @@ export default function HomePage() {
               />
               <Button
                 type='submit'
-                label='Entrar com GitHub'
+                iconName='arrowRight'
                 fullWidth
                 buttonColors={{
                   contrastColor: appConfig.theme.colors.neutrals["100"],
@@ -97,10 +106,21 @@ export default function HomePage() {
                   mainColorLight: appConfig.theme.colors.primary[400],
                   mainColorStrong: appConfig.theme.colors.primary[600],
                 }}
+                styleSheet={{borderRadius: '50%',
+                padding: '0 3px 0 0',
+                minWidth: '45px',
+                minHeight: '40px',
+                fontSize: '15px',
+                marginBottom: '8px',
+                marginLeft: '8px',
+                lineHeight: '0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',}}
               />
+              </Box>
 
-
-
+              <Text variant="body3" styleSheet={{ marginBottom: '12px', color: appConfig.theme.colors.neutrals[300] }}>Or</Text>
 
               <Button
                 type='submit'
@@ -112,7 +132,6 @@ export default function HomePage() {
                   mainColorLight: appConfig.theme.colors.primary[600],
                   mainColorStrong: appConfig.theme.colors.primary[800],
                 }}
-                styleSheet={{ marginTop: '6px' }}
                 onClick={() => {setUsername(''), setRandomUser(true) }}
               />
             </Box>
