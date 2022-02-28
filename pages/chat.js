@@ -22,7 +22,7 @@ const dbSupaInteraction = createClient(SUPA_URL, SUPA_KEY)
 
 
 export default function ChatPage() {
-    const [mensagem, setMensagem] = React.useState('')
+    const [message, setMessage] = React.useState('')
     const [messageList, setMessageList] = React.useState([])
 
     // When this function is called it checks if there is any new messages before 
@@ -39,39 +39,48 @@ export default function ChatPage() {
     const roteamento = useRouter()
     const loggedUser = roteamento.query.username
 
-    // Por padrao o useeffect roda qnd a pagina carrega
-    // Caso queira onChange basta colocar a variavel onchange na entrada secundaria array
+    // By default useEffect runs when the page loads
+    // If you want onChange to work just insert it in the second input which is an array
     React.useEffect(() => {
         dbSupaInteraction.from('mesHis').select('*').order('id', { ascending: false }).then(({ data }) => {
             setMessageList(data);
         })
-        listenerSupaBase((novaMensagem)=>{
-            console.log('novamensagem: '+novaMensagem);
+        listenerSupaBase((newMessage)=>{
+            console.log('newMessage: '+newMessage);
             setMessageList((realtimeListValue)=>{
                 return [
-                    novaMensagem, ...realtimeListValue,
+                    newMessage, ...realtimeListValue,
                 ]
             })
     }, [])
 })
 
-
-    function handleNewMessage(novaMensagem) {
-        const mensagem = {
-            id: messageList.length + 1,
-            de: loggedUser,
-            texto: novaMensagem,
-            created_at: (new Date()).toLocaleDateString()
-        }
-        console.log(mensagem)
-        dbSupaInteraction.from('mesHis').insert([mensagem])
-        .then(({ data }) => {
-            console.log('Resposta handleNewMessage:::: ' + data)
-        })
-
-        setMensagem('');
-
+// maintenance
+// refactoring the way the software send messages and show them
+const addMessage= async(userId,userName,userText,createdAt)=>{
+    try {
+        let {body} = await dbSupaInteraction.from('mesHis').insert([{ userId,userName,userText,createdAt }])
+        return body
+    } catch(error){
+        console.log('error',error)
     }
+    setMessage('');
+}
+
+
+const handleNewMessage = async(newMessage) =>{
+    const message = {
+        id: messageList.length + 1,
+        from: loggedUser,
+        text: newMessage,
+        created_at: (new Date()).toLocaleDateString()
+    }
+    addMessage(message.id,message.from,message.text,message.created_at)
+}
+// refactoring the way the software send messages and show them
+// maintenance
+    
+
 
     return (
         <Box
@@ -128,7 +137,7 @@ export default function ChatPage() {
                     >
                         <TextField
                             placeholder="Insira sua mensagem aqui..."
-                            value={mensagem}
+                            value={message}
                             type="textarea"
                             styleSheet={{
                                 width: '100%',
@@ -141,13 +150,12 @@ export default function ChatPage() {
                                 color: appConfig.theme.colors.neutrals[200],
                             }}
                             onChange={(event) => {
-                                const valor = event.target.value
-                                setMensagem(valor)
+                                setMessage(event.target.value)
                             }}
                             onKeyPress={(event) => {
                                 if (event.key === 'Enter') {
                                     event.preventDefault();
-                                    handleNewMessage(mensagem);
+                                    handleNewMessage(message);
                                 }
                             }
                             }

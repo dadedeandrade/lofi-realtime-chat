@@ -39,7 +39,7 @@ export function UserImage(props) {
             borderRadius: '1000px'
           }}
         >
-          <p>Waiting a user to be inserted
+          <p>Aguardando um usuário ser inserido
           <span className='dot1'> .</span>
           <span className='dot2'>.</span>
           <span className='dot3'>.</span>         

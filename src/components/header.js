@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 
 export function Header() {
-    const roteamento = useRouter()
+    const router = useRouter()
     return (
         <>
             <Box styleSheet={{ 
@@ -21,7 +21,7 @@ export function Header() {
                     textAlign: 'center'
                 }}>
                     <Text variant='body4'>Você está logado como:</Text>
-                    <Text variant='body1'>{roteamento.query.username}</Text>
+                    <Text variant='body1'>{router.query.username}</Text>
                     
                 </Box>
                 

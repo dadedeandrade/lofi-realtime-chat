@@ -18,8 +18,8 @@ import appConfig from '../config.json'
 export default function HomePage() {
   const [username, setUsername] = useState('');
   const [isRandomUser, setRandomUser] = useState(false)
-  const roteamento = useRouter()
-  console.log(roteamento)
+  const router = useRouter()
+  console.log(router)
 
   return (
     <>
@@ -54,9 +54,9 @@ export default function HomePage() {
             {/* Form */}
             <Box
               as="form"
-              onSubmit={function (infoDoEvento) {
-                infoDoEvento.preventDefault()
-                roteamento.push(`/chat?username=${username}`)
+              onSubmit={function (event) {
+                event.preventDefault()
+                router.push(`/chat?username=${username}`)
               }}
               styleSheet={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -87,7 +87,7 @@ export default function HomePage() {
                     backgroundColor: appConfig.theme.colors.neutrals[800],
                   }
                 }}
-                placeholder='Insert your github user here to join the chat :)'
+                placeholder='Insira seu usuário do GitHub aqui :)'
                 onChange={
                   function (event) {
                     const valor = event.target.value
@@ -120,11 +120,11 @@ export default function HomePage() {
               />
               </Box>
 
-              <Text variant="body3" styleSheet={{ marginBottom: '12px', color: appConfig.theme.colors.neutrals[300] }}>Or</Text>
+              <Text variant="body3" styleSheet={{ marginBottom: '12px', color: appConfig.theme.colors.neutrals[300] }}>ou</Text>
 
               <Button
                 type='submit'
-                label='Enter as a Guest'
+                label='Entrar como convidado'
                 fullWidth
                 buttonColors={{
                   contrastColor: appConfig.theme.colors.neutrals["000"],
@@ -196,12 +196,12 @@ export default function HomePage() {
             }}
           >
 
-            {/* Formulário */}
+            {/* Form */}
             <Box
               as="form"
-              onSubmit={function (infoDoEvento) {
-                infoDoEvento.preventDefault()
-                roteamento.push(`/chat?username=${username+' (Convidado)'}`)
+              onSubmit={function (event) {
+                event.preventDefault()
+                router.push(`/chat?username=${username+' (Convidado)'}`)
               }}
               styleSheet={{
                 display: 'flex',
@@ -287,7 +287,7 @@ export default function HomePage() {
                 }}
               />
             </Box>
-            {/* Formulário */}
+            {/* Form */}
 
 
             {/* Photo Area */}

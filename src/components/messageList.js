@@ -18,10 +18,10 @@ export function MessageList(props) {
                 marginBottom: '16px',
             }}
         >
-            {props.messageList.map((mensagemAtual) => {
+            {props.messageList.map((currentMessage) => {
                 return (
                     <Text
-                        key={mensagemAtual.id}
+                        key={currentMessage.id}
                         tag="li"
                         styleSheet={{
                             borderRadius: '5px',
@@ -47,13 +47,13 @@ export function MessageList(props) {
                                     display: 'inline-block',
                                     marginRight: '8px',
                                 }}
-                                src={`https://github.com/${mensagemAtual.de}.png`}
+                                src={`https://github.com/${currentMessage.from}.png`}
 
 
                                 
                             />
                             <Text tag="strong">
-                                {mensagemAtual.de}
+                                {currentMessage.from}
                             </Text>
                             <Text
                                 styleSheet={{
@@ -64,16 +64,16 @@ export function MessageList(props) {
                                 tag="span"
                                 
                                 >
-                                {mensagemAtual.created_at}
+                                {currentMessage.created_at}
                             </Text>
                         </Box>
-                        {mensagemAtual.texto.startsWith(':stickerURL:')
+                        {currentMessage.text.startsWith(':stickerURL:')
                             ? (
                                 <Image 
-                                src={mensagemAtual.texto.replace(':stickerURL:', '')} />
+                                src={currentMessage.text.replace(':stickerURL:', '')} />
                                 )
                                 : (
-                                mensagemAtual.texto
+                                currentMessage.text
                                 )
                             }
                     </Text>
