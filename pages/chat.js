@@ -67,6 +67,9 @@ const addMessage= async(userId,userName,userText,createdAt)=>{
     setMessage('');
 }
 
+const tempHandleNewMessage = ()=>{
+    window.alert('Infelizmente estamos tendo problemas para lidar com novas mensagens :( \n Estou trabalhando para corrigir o quanto antes!')
+}
 
 const handleNewMessage = async(newMessage) =>{
     const message = {
@@ -155,7 +158,7 @@ const handleNewMessage = async(newMessage) =>{
                             onKeyPress={(event) => {
                                 if (event.key === 'Enter') {
                                     event.preventDefault();
-                                    handleNewMessage(message);
+                                    tempHandleNewMessage();
                                 }
                             }
                             }
