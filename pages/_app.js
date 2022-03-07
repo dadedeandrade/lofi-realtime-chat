@@ -22,7 +22,14 @@ function GlobalStyle() {
       #__next > * {
         flex: 1;
       }
-      /* ./App fit Height */ 
+
+      @media (max-width: 768px) 
+      {
+        div {
+          font-size: 2px;
+        }
+      }
+      
     `}</style>
     );
   }

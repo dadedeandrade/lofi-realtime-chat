@@ -88,15 +88,20 @@ const handleNewMessage = async(newMessage) =>{
     return (
         <Box
             styleSheet={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
                 backgroundColor: appConfig.theme.colors.primary[500],
                 backgroundImage: `url(https://cdna.artstation.com/p/assets/images/images/018/836/268/large/fajar-fazriansyah-master-10.jpg?1560916155)`,
-                backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
+                backgroundRepeat: 'no-repeat', 
+                backgroundSize: 'cover', 
+                backgroundBlendMode: 'multiply',
                 backgroundPosition: 'right',
                 color: appConfig.theme.colors.neutrals['000'],
             }}
         >
             {/* Background chat */}
+            
             <Box
                 styleSheet={{
                     display: 'flex',
@@ -106,7 +111,9 @@ const handleNewMessage = async(newMessage) =>{
                     borderRadius: '5px',
                     transition: 0.2,
                     height: '100%',
-                    maxWidth: '55%',
+                    maxWidth: {md: '55%'},
+                    maxWidth: {xs: '55%'},
+                    maxWidth: {sm: '65%'},
                     maxHeight: '75vh',
                     padding: '32px'
                 }}
