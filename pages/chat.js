@@ -30,6 +30,7 @@ export default function ChatPage() {
         return dbSupaInteraction
             .from('mesHis')
             .on('INSERT',(liveResponse) => {
+                console.log('liveresponse '+liveResponse)
                 addMsg(liveResponse.new)
             })
             .subscribe()    
@@ -45,6 +46,7 @@ export default function ChatPage() {
         dbSupaInteraction.from('mesHis').select('*').order('id', { ascending: false }).then(({ data }) => {
             setMessageList(data);
         })
+
         listenerSupaBase((newMessage)=>{
             console.log('newMessage: '+newMessage);
             setMessageList((realtimeListValue)=>{
@@ -67,9 +69,9 @@ const addMessage= async(userId,userName,userText,createdAt)=>{
     setMessage('');
 }
 
-const tempHandleNewMessage = ()=>{
-    window.alert('Infelizmente estamos tendo problemas para lidar com novas mensagens :( \n Estou trabalhando para corrigir o quanto antes!')
-}
+// const tempHandleNewMessage = ()=>{
+//     window.alert('Infelizmente estamos tendo problemas para lidar com novas mensagens :( \n Estou trabalhando para corrigir o quanto antes!')
+// }
 
 const handleNewMessage = async(newMessage) =>{
     const message = {
@@ -78,7 +80,7 @@ const handleNewMessage = async(newMessage) =>{
         text: newMessage,
         created_at: (new Date()).toLocaleDateString()
     }
-    addMessage(message.id,message.from,message.text,message.created_at)
+    console.log(addMessage(message.id,message.from,message.text,message.created_at))
 }
 // refactoring the way the software send messages and show them
 // maintenance
@@ -165,7 +167,7 @@ const handleNewMessage = async(newMessage) =>{
                             onKeyPress={(event) => {
                                 if (event.key === 'Enter') {
                                     event.preventDefault();
-                                    tempHandleNewMessage();
+                                    handleNewMessage(message);
                                 }
                             }
                             }
