@@ -30,7 +30,6 @@ export default function ChatPage() {
         return dbSupaInteraction
             .from('mesHis')
             .on('INSERT',(liveResponse) => {
-                console.log('liveresponse '+liveResponse)
                 addMsg(liveResponse.new)
             })
             .subscribe()    
@@ -46,7 +45,6 @@ export default function ChatPage() {
         dbSupaInteraction.from('mesHis').select('*').order('id', { ascending: false }).then(({ data }) => {
             setMessageList(data);
         })
-
         listenerSupaBase((newMessage)=>{
             console.log('newMessage: '+newMessage);
             setMessageList((realtimeListValue)=>{
@@ -57,34 +55,22 @@ export default function ChatPage() {
     }, [])
 })
 
-// maintenance
-// refactoring the way the software send messages and show them
-const addMessage= async(userId,userName,userText,createdAt)=>{
-    try {
-        let {body} = await dbSupaInteraction.from('mesHis').insert([{ userId,userName,userText,createdAt }])
-        return body
-    } catch(error){
-        console.log('error',error)
-    }
-    setMessage('');
-}
-
-// const tempHandleNewMessage = ()=>{
-//     window.alert('Infelizmente estamos tendo problemas para lidar com novas mensagens :( \n Estou trabalhando para corrigir o quanto antes!')
-// }
-
-const handleNewMessage = async(newMessage) =>{
+function handleNewMessage(newMessage) {
     const message = {
         id: messageList.length + 1,
         from: loggedUser,
         text: newMessage,
         created_at: (new Date()).toLocaleDateString()
     }
-    console.log(addMessage(message.id,message.from,message.text,message.created_at))
-}
-// refactoring the way the software send messages and show them
-// maintenance
-    
+    console.log(message)
+    dbSupaInteraction.from('mesHis').insert([message])
+    .then(({ data }) => {
+        console.log('Resposta handleNewMessage:::: ' + data)
+    })
+
+    setMessage('');
+
+}   
 
 
     return (
