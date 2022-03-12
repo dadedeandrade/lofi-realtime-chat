@@ -9,6 +9,7 @@ import { ButtonSendSticker } from '../src/components/buttonSendSticker.js'
 import { MessageList } from '../src/components/messageList.js'
 import { Header } from '../src/components/header.js'
 
+
 // Style
 import appConfig from '../config.json';
 import styles from '../styles/glassMorphism.module.css'
