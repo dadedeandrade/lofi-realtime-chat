@@ -12,7 +12,7 @@ import { Header } from '../src/components/header.js'
 
 // Style
 import appConfig from '../config.json';
-import styles from '../styles/glassMorphism.module.css'
+import styles from '../src/styles/glassMorphism.module.css'
 
 // Database
 import { createClient, SupabaseClient } from '@supabase/supabase-js'

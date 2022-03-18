@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, Text } from '@skynexui/components';
+import { Box, Text, Image } from '@skynexui/components';
 import appConfig from '../../config.json';
-import { UserImage } from './userImage.js'
 // import styles from '../../styles/scrollbar.module.css'
 
 export function MessageList(props) {
@@ -40,7 +39,7 @@ export function MessageList(props) {
                                 alignItems: "center"
                             }}
                         >
-                            <UserImage
+                            <Image
                                 styleSheet={{
                                     width: '20px',
                                     height: '20px',
@@ -70,7 +69,7 @@ export function MessageList(props) {
                         </Box>
                         {currentMessage.text.startsWith(':stickerURL:')
                             ? (
-                                <UserImage 
+                                <Image 
                                 src={currentMessage.text.replace(':stickerURL:', '')} />
                                 )
                                 : (

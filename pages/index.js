@@ -157,7 +157,7 @@ export default function HomePage() {
 
               <UserImage
                 src={`https://github.com/${username}.png`}
-              />,
+              />
               {username.length > 0 &&
               
               <Text
