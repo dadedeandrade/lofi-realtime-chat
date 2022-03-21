@@ -48,13 +48,23 @@ export function MessageList(props) {
                                     marginRight: '8px',
                                 }}
                                 src={`https://github.com/${currentMessage.from}.png`}
-
-
-                                
+                                onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null; // prevents looping
+                                    currentTarget.src= "./../randomUser.jpeg";
+                                }}
+                                                            
                             />
+                            {currentMessage.from === ''
+                            ?(
+                            <Text tag="strong">
+                                Nameless (Usuário Sem Github)
+                            </Text>
+                            ) : (
                             <Text tag="strong">
                                 {currentMessage.from}
                             </Text>
+                            )
+                            }
                             <Text
                                 styleSheet={{
                                     fontSize: '10px',

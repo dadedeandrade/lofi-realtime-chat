@@ -5,6 +5,8 @@ import Link from 'next/link'
 
 // Librarys
 import { Box, Button, Text, TextField, Icon } from '@skynexui/components';
+import { motion } from 'framer-motion';
+
 
 // Components
 import { Title } from '../src/components/title.js'
@@ -34,7 +36,20 @@ export default function HomePage() {
           backgroundSize: 'cover',
           backgroundBlendMode: 'multiply',
         }}
-      >
+        >
+        <motion.div initial="hidden" animate="visible" variants={{
+          hidden: {
+            scale: .8,
+            opacity: 0
+          },
+          visible:{
+            scale:1,
+            opacity: 1,
+            transition: {
+              delay: 0
+            }
+          }
+        }}>
         {!isRandomUser &&
           <Box
             styleSheet={{
@@ -176,7 +191,7 @@ export default function HomePage() {
             {/* Photo Area */}
           </Box>
         }
-
+        </motion.div>
 
         {isRandomUser &&
           <Box
@@ -195,13 +210,12 @@ export default function HomePage() {
               backgroundColor: appConfig.theme.colors.neutrals[700],
             }}
           >
-
             {/* Form */}
             <Box
               as="form"
               onSubmit={function (event) {
                 event.preventDefault()
-                router.push(`/chat?username=${username+' (Convidado)'}`)
+                router.push(`/chat?username=${username+' (Usuário sem Github)'}`)
               }}
               styleSheet={{
                 display: 'flex',
