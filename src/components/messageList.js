@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Text, Image } from '@skynexui/components';
 import appConfig from '../../config.json';
+import { motion } from 'framer-motion';
+
 // import styles from '../../styles/scrollbar.module.css'
 
 export function MessageList(props) {
@@ -20,6 +22,7 @@ export function MessageList(props) {
         >
             {props.messageList.map((currentMessage) => {
                 return (
+                    
                     <Text
                         key={currentMessage.id}
                         tag="li"

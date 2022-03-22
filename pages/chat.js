@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 
 // Librarys
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
+import { motion } from 'framer-motion';
+
 // Components
 import { ButtonSendSticker } from '../src/components/buttonSendSticker.js'
 import { MessageList } from '../src/components/messageList.js'
@@ -78,6 +80,7 @@ function handleNewMessage(newMessage) {
         <Box
             styleSheet={{
                 display: 'flex', 
+                height:'100vh',
                 alignItems: 'center', 
                 justifyContent: 'center',
                 backgroundColor: appConfig.theme.colors.primary[500],
