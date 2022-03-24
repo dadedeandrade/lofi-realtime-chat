@@ -4,7 +4,7 @@ Foi feito alterações na estrutura para adicionar funcionalidades, bibliotecas 
 
 ## Pendencias
 ### (Index.JS)
-- [ ] Sessão pra login sem usuario
+- [X] Sessão pra login sem usuario
 ### (Chat.JS)
 
 - [X] Error 400 Não está funcionando o chat :(((
@@ -23,8 +23,6 @@ Foi feito alterações na estrutura para adicionar funcionalidades, bibliotecas 
 
 ## Melhorias
 ### (Index.JS)
-- [ ]  Sass to export config json in .css files 
-    https://www.npmjs.com/package/node-sass-json-importer
 - [ ] Non github Image upload
 ### (Chat.JS)
 - [ ]  Botao de delete no canto superior direito reminder: Filter() de um jeito que ela tira o item que bate com alguma regra - Quebrar em funcoes menores e refatorar a integração com DB
