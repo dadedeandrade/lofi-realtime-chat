@@ -8,7 +8,7 @@ Foi feito alterações na estrutura para adicionar funcionalidades, bibliotecas 
 ### (Chat.JS)
 
 - [X] Error 400 Não está funcionando o chat :(((
-- [ ] Data das mensagens antigas
+- [X] Data das mensagens antigas
 - [X] Warning: Encountered two children with the same key
 - [X] Mostrar usuario logado
 - [X] Corrigir bug de 2 mensagens rapidas
@@ -33,7 +33,7 @@ Foi feito alterações na estrutura para adicionar funcionalidades, bibliotecas 
 - [ ] Filtro em frases maliciosas
 ### (General)
 - [X] Transformar componentes em arquivos 
-- [ ] Implementar backgroundimage com arquivosss locaisss
+- [X] Implementar backgroundimage com arquivosss locaisss
 SSolução1: Next-imagess
     - https://stackoverflow.com/questions/51842419/next-js-background-image-css-property-cant-load-the-image
     - https://nextjs.org/docs/api-reference/next.config.js/introduction
@@ -41,5 +41,5 @@ SSolução1: Next-imagess
 
 ### Desafios
 - [ ] Integrar com Twitch
-- [ ] Refatorar toda a funcionalidade do UserImage
+- [X] Refatorar toda a funcionalidade do UserImage
 - [ ] Integrar com Spotify 
