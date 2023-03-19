@@ -17,6 +17,7 @@ export default function MyApp({ Component, pageProps, router }) {
             key={router.route}
             initial="pageInitial"
             animate="pageAnimate"
+            transition={{ delay: 1 }}
             variants={{
               pageInitial: {
                 opacity: 0,

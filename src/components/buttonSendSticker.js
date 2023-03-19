@@ -1,18 +1,18 @@
 import React from 'react';
 import { Box, Button, Text, Image } from '@skynexui/components';
-import appConfig from '../../config.json';
+import appConfig from '../../config';
 
 export function ButtonSendSticker(props) {
   const [isOpen, setOpenState] = React.useState('');
 
   return (
     <Box
-      styleSheet={{
+      style={{
         position: 'relative',
       }}
     >
       <Button
-        styleSheet={{
+        style={{
           borderRadius: '50%',
           padding: '0 3px 0 0',
           minWidth: '50px',
@@ -34,7 +34,7 @@ export function ButtonSendSticker(props) {
       />
       {isOpen && (
         <Box
-          styleSheet={{
+          style={{
             display: 'flex',
             flexDirection: 'column',
             borderRadius: '5px',
@@ -53,7 +53,7 @@ export function ButtonSendSticker(props) {
           onClick={() => setOpenState(false)}
         >
           <Text
-            styleSheet={{
+            style={{
               color: appConfig.theme.colors.neutrals["000"],
               fontWeight: 'bold',
             }}
@@ -62,7 +62,7 @@ export function ButtonSendSticker(props) {
           </Text>
           <Box
             tag="ul"
-            styleSheet={{
+            style={{
               overflow: 'auto',
               display: 'flex',
               flexWrap: 'wrap',
@@ -80,7 +80,7 @@ export function ButtonSendSticker(props) {
                   }
                 }}
                 tag="li" key={sticker}
-                styleSheet={{
+                style={{
                   width: '50%',
                   borderRadius: '5px',
                   padding: '10px',

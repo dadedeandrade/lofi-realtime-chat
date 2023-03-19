@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text, Image } from '@skynexui/components';
-import appConfig from '../../config.json';
+import appConfig from '../../config';
 import { motion } from 'framer-motion';
 
 // import styles from '../../styles/scrollbar.module.css'
@@ -11,7 +11,7 @@ export function MessageList(props) {
     return (
         <Box
             tag="ul"
-            styleSheet={{
+            style={{
                 overflow: 'auto',
                 display: 'flex',
                 flexDirection: 'column-reverse',
@@ -26,7 +26,7 @@ export function MessageList(props) {
                     <Text
                         key={currentMessage.id}
                         tag="li"
-                        styleSheet={{
+                        style={{
                             borderRadius: '5px',
                             padding: '6px',
                             marginBottom: '12px',
@@ -36,14 +36,14 @@ export function MessageList(props) {
                         }}
                     >
                         <Box
-                            styleSheet={{
+                            style={{
                                 marginBottom: "8px",
                                 display: "flex",
                                 alignItems: "center"
                             }}
                         >
                             <Image
-                                styleSheet={{
+                                style={{
                                     width: '20px',
                                     height: '20px',
                                     borderRadius: '50%',
@@ -69,7 +69,7 @@ export function MessageList(props) {
                             )
                             }
                             <Text
-                                styleSheet={{
+                                style={{
                                     fontSize: '10px',
                                     marginLeft: '8px',
                                     color: appConfig.theme.colors.neutrals[300],

@@ -22,14 +22,39 @@ import { colors } from "../../../theme/colors";
 import { BsGithub } from "react-icons/bs";
 import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-export default function Login() {
+export async function getServerSideProps(context) {
+  console.log("testtesttesttesttesttesttesttesttesttesttesttesttesttesttest");
+
+  return {
+    props: {
+      test: "teste",
+    },
+  };
+}
+
+function Login(props) {
+  console.log("props.test", props);
+
+  const router = useRouter();
+  useEffect(() => {
+    const queryString = router.query.code;
+    console.log(queryString);
+  }, []);
+  function loginWithGithub() {
+    router.push(
+      `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`
+    );
+  }
   const dispatch = useAppDispatch();
 
   return (
     <motion.div
       initial={{ x: -200, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
+      transition={{ delay: 0 }}
       style={{
         display: "flex",
         justifyContent: "center",
@@ -38,6 +63,7 @@ export default function Login() {
         width: "100%",
       }}
     >
+      <h1>{props.test}</h1>
       <VStack gap="15px" w="fit-content">
         <Heading color={colors.primary["primary-300"]} as="h2">
           🍃 Chillin 🍃
@@ -55,7 +81,7 @@ export default function Login() {
               bg={"transparent"}
               _hover={{
                 background: "transparent",
-                cursor: "pointer",
+                cursor: "not-allowed",
                 transform: "scale(1.25)",
                 transition: "transform .2s",
               }}
@@ -64,7 +90,7 @@ export default function Login() {
               aria-label={"Click to login with Apple ID"}
             />
             <IconButton
-              onClick={(e) => alert("not ready yet :(")}
+              onClick={loginWithGithub}
               _hover={{
                 background: "transparent",
                 cursor: "pointer",
@@ -80,7 +106,7 @@ export default function Login() {
               onClick={(e) => alert("not ready yet :(")}
               _hover={{
                 background: "transparent",
-                cursor: "pointer",
+                cursor: "not-allowed",
                 transform: "scale(1.25)",
                 transition: "transform .2s",
               }}
@@ -117,3 +143,5 @@ export default function Login() {
     </motion.div>
   );
 }
+
+export default Login;

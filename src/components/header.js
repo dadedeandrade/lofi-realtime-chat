@@ -7,7 +7,7 @@ export function Header() {
     const router = useRouter()
     return (
         <>
-            <Box styleSheet={{ 
+            <Box style={{ 
                 width: '100%',
                  marginBottom: '16px',
                   display: 'flex',
@@ -17,7 +17,7 @@ export function Header() {
              >
                 <Text variant='heading5'>Chat</Text>
                 <Box 
-                styleSheet={{
+                style={{
                     textAlign: 'center'
                 }}>
                     <Text variant='body4'>Você está logado como:</Text>

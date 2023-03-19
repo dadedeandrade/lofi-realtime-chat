@@ -20,7 +20,11 @@ export default function CreateAccount() {
   const handleClick = () => setShow(!show);
 
   return (
-    <motion.div initial={{ x: 200, opacity: 0 }} animate={{ x: 0, opacity: 1 }}>
+    <motion.div
+      transition={{ delay: 0 }}
+      initial={{ x: 200, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+    >
       <VStack gap={"10px"}>
         <Button
           leftIcon={<ArrowBackIcon />}

@@ -32,7 +32,7 @@ export default function HomePage() {
         margin="16px"
         boxShadow="0 2px 10px 0 rgb(0 0 0 / 20%)"
       >
-        <motion.div initial={false}>
+        <motion.div transition={{ delay: 0 }} initial={false}>
           {isRandomUser ? <CreateAccount /> : <Login />}
         </motion.div>
       </VStack>

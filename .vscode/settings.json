@@ -1,3 +1,5 @@
 {
-    "workbench.colorTheme": "Shades of Purple"
+  "workbench.colorTheme": "Omni",
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }
