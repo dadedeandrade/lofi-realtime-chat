@@ -23,32 +23,54 @@ import { BsGithub } from "react-icons/bs";
 import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-
-export async function getServerSideProps(context) {
-  console.log("testtesttesttesttesttesttesttesttesttesttesttesttesttesttest");
-
-  return {
-    props: {
-      test: "teste",
-    },
-  };
-}
+import { useEffect, useState } from "react";
+import { setGithubAccessToken } from "../../../app/features/setGithubAccessTokenSlice";
 
 function Login(props) {
-  console.log("props.test", props);
+  const [rerender, setRerender] = useState(false);
+  const dispatch = useAppDispatch();
+  const { query, isReady, push } = useRouter();
 
-  const router = useRouter();
   useEffect(() => {
-    const queryString = router.query.code;
-    console.log(queryString);
-  }, []);
+    const codeParam = query.code;
+
+    if (codeParam && localStorage.getItem("accessToken") === null) {
+      const getAccessToken = async () => {
+        await fetch(
+          `${window.location.origin + "/api/getAccessToken?code=" + codeParam}`,
+          {
+            method: "GET",
+          }
+        )
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (data.access_token) {
+              localStorage.setItem("accessToken", data.access_token);
+              setRerender((prev) => !prev);
+            } else {
+            }
+          });
+      };
+      getAccessToken();
+    }
+    if (localStorage.getItem("accessToken") != null) {
+      push(
+        `${window.location.origin}/chat/?user=${localStorage.getItem(
+          "accessToken"
+        )}`
+      );
+    }
+  }, [query.code, rerender]);
+
+  // return push(`${window.location.origin}/chat/?user=${accessToken}`);
+
   function loginWithGithub() {
-    router.push(
-      `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`
+    push(
+      `https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}`
     );
   }
-  const dispatch = useAppDispatch();
 
   return (
     <motion.div
