@@ -1,4 +1,4 @@
-export interface UserData {
+export type UserData = {
   login: string;
   id: number;
   node_id: string;
@@ -31,8 +31,4 @@ export interface UserData {
   following: number;
   created_at: string;
   updated_at: string;
-}
-
-export interface UserDataError {
-  message: string;
-}
+};

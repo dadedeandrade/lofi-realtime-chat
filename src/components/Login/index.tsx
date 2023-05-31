@@ -24,12 +24,13 @@ import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { setGithubAccessToken } from "../../../app/features/setGithubAccessTokenSlice";
 
 function Login(props) {
   const [rerender, setRerender] = useState(false);
   const dispatch = useAppDispatch();
   const { query, isReady, push } = useRouter();
+  console.log(process.env.NEXT_PUBLIC_CLIENT_SECRET);
+  console.log(process.env.NEXT_PUBLIC_CLIENT_ID);
 
   useEffect(() => {
     const codeParam = query.code;
