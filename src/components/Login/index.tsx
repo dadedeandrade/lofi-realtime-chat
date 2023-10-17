@@ -29,8 +29,6 @@ function Login(props) {
   const [rerender, setRerender] = useState(false);
   const dispatch = useAppDispatch();
   const { query, isReady, push } = useRouter();
-  console.log(process.env.NEXT_PUBLIC_CLIENT_SECRET);
-  console.log(process.env.NEXT_PUBLIC_CLIENT_ID);
 
   useEffect(() => {
     const codeParam = query.code;

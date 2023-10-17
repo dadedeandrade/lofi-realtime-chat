@@ -84,7 +84,6 @@ export function ButtonSendSticker(props: ButtonSendStickerProps) {
                   backgroundColor: colors.neutrals['neutrals-600'],
                 }}
                 onClick={() => {
-                  console.log('[dentro do componente]Clicou no sticker:', sticker);
                   if (Boolean(props.onStickerClick)) {
                     props.onStickerClick!(sticker);
                   }

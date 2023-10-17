@@ -6,7 +6,6 @@ export const addMessage = async (message, channel_id, user_id) => {
       let { body } = await supabase.from('messages').insert([{ message, channel_id, user_id }])
       return body
     } catch (error) {
-      console.log('error', error)
     }
   }
 

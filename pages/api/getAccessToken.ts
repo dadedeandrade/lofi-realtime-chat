@@ -5,10 +5,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const params = `?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&client_secret=${process.env.NEXT_PUBLIC_CLIENT_SECRET}&code=${_req.query.code}`;
-  console.log(params);
-  
-  console.log(process.env.NEXT_PUBLIC_CLIENT_SECRET);
-  console.log(process.env.NEXT_PUBLIC_CLIENT_ID);
 
   await fetch("https://github.com/login/oauth/access_token" + params, {
     method: "POST",

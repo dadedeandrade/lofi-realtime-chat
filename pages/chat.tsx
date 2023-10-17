@@ -9,7 +9,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { UserData } from "./chatTypes";
+import { UserData } from "../src/types/chat";
 import { colors } from "../theme/colors";
 import { Header } from "../src/components/header";
 import styles from "../src/styles/glassMorphism.module.css";
@@ -78,12 +78,10 @@ export default function ChatPage() {
       text: newMessage,
       created_at: new Date().toLocaleDateString(),
     };
-    console.log(message);
     dbSupaInteraction
       .from("mesHis")
       .insert([message])
       .then(({ data }) => {
-        console.log("Resposta handleNewMessage:::: " + data);
       });
 
     setMessage("");

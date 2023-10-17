@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Box, Button, HStack, Stack, Text } from "@chakra-ui/react";
-import { UserData } from "../../pages/chatTypes";
+import { UserData } from "../types/chat";
 import { colors } from "../../theme/colors";
 
 export function Header({ ...props }: UserData) {
   const [rerender, setRerender] = useState<boolean>(false);
   const router = useRouter();
-
-  console.log(props);
-  
 
   return (
     <Box
