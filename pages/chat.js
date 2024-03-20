@@ -29,16 +29,16 @@ export default function ChatPage() {
     const [messageList, setMessageList] = React.useState([])
 
     // When this function is called it checks if there is any new messages before 
-    function listenerSupaBase(addMsg){
+    function listenerSupaBase(addMsg) {
         return dbSupaInteraction
             .from('mesHis')
-            .on('INSERT',(liveResponse) => {
+            .on('INSERT', (liveResponse) => {
                 addMsg(liveResponse.new)
             })
-            .subscribe()    
-    } 
-    
-    
+            .subscribe()
+    }
+
+
     const roteamento = useRouter()
     const loggedUser = roteamento.query.username
 
@@ -48,52 +48,52 @@ export default function ChatPage() {
         dbSupaInteraction.from('mesHis').select('*').order('id', { ascending: false }).then(({ data }) => {
             setMessageList(data);
         })
-        listenerSupaBase((newMessage)=>{
-            console.log('newMessage: '+newMessage);
-            setMessageList((realtimeListValue)=>{
+        listenerSupaBase((newMessage) => {
+            console.log('newMessage: ' + newMessage);
+            setMessageList((realtimeListValue) => {
                 return [
                     newMessage, ...realtimeListValue,
                 ]
             })
-    }, [])
-})
-
-function handleNewMessage(newMessage) {
-    const message = {
-        id: messageList.length + 1,
-        from: loggedUser,
-        text: newMessage,
-        created_at: (new Date()).toLocaleDateString()
-    }
-    console.log(message)
-    dbSupaInteraction.from('mesHis').insert([message])
-    .then(({ data }) => {
-        console.log('Resposta handleNewMessage:::: ' + data)
+        }, [])
     })
 
-    setMessage('');
+    function handleNewMessage(newMessage) {
+        const message = {
+            id: messageList.length + 1,
+            from: loggedUser,
+            text: newMessage,
+            created_at: (new Date()).toLocaleDateString()
+        }
+        console.log(message)
+        dbSupaInteraction.from('mesHis').insert([message])
+            .then(({ data }) => {
+                console.log('Resposta handleNewMessage:::: ' + data)
+            })
 
-}   
+        setMessage('');
+
+    }
 
 
     return (
         <Box
             styleSheet={{
-                display: 'flex', 
-                height:'100vh',
-                alignItems: 'center', 
+                display: 'flex',
+                height: '100vh',
+                alignItems: 'center',
                 justifyContent: 'center',
                 backgroundColor: appConfig.theme.colors.primary[500],
-                backgroundImage: `url(https://cdna.artstation.com/p/assets/images/images/018/836/268/large/fajar-fazriansyah-master-10.jpg?1560916155)`,
-                backgroundRepeat: 'no-repeat', 
-                backgroundSize: 'cover', 
+                backgroundImage: 'url(/chatBackground.jpg)',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
                 backgroundBlendMode: 'multiply',
                 backgroundPosition: 'right',
                 color: appConfig.theme.colors.neutrals['000'],
             }}
         >
             {/* Background chat */}
-            
+
             <Box
                 styleSheet={{
                     display: 'flex',
@@ -103,9 +103,9 @@ function handleNewMessage(newMessage) {
                     borderRadius: '5px',
                     transition: 0.2,
                     height: '100%',
-                    maxWidth: {md: '55%'},
-                    maxWidth: {xs: '55%'},
-                    maxWidth: {sm: '65%'},
+                    maxWidth: { md: '55%' },
+                    maxWidth: { xs: '55%' },
+                    maxWidth: { sm: '65%' },
                     maxHeight: '75vh',
                     padding: '32px'
                 }}
@@ -163,9 +163,9 @@ function handleNewMessage(newMessage) {
                             }
                         />
                         <ButtonSendSticker
-                        onStickerClick={(sticker)=>{
-                          handleNewMessage(':stickerURL:'+sticker)
-                        }}
+                            onStickerClick={(sticker) => {
+                                handleNewMessage(':stickerURL:' + sticker)
+                            }}
                         />
                     </Box>
                 </Box>
